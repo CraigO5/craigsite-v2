@@ -27,6 +27,7 @@ import {
   SiLinkedin,
 } from "react-icons/si"; // or "react-icons/fa"
 import { FaFileAlt } from "react-icons/fa";
+import { useEffect, useState } from "react";
 const labeledIcons = [
   // --- Languages ---
 
@@ -195,11 +196,56 @@ export default function Home() {
     "hover:scale-110 hover:bg-white hover:text-black transition-all duration-100";
   const socialStyle =
     "drop-shadow-md/25 hover:scale-120 hover:text-black transition-all duration-300";
+
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       <SmoothScroll />
+      {isScrolled && (
+        <nav className="animate__animated animate__bounceInDown fixed z-1 flex w-full bg-black">
+          <div className="mx-auto my-5 flex w-[80%] items-center justify-between">
+            <div>
+              <a href="#">
+                <Image
+                  src="./logo.png"
+                  alt="Logo"
+                  width={60}
+                  height={60}
+                  className="animate__animated animate__rubberBand drop-shadow-white/50 transition-all duration-300 hover:scale-130 hover:invert"
+                />
+              </a>
+            </div>
+            {/* Socials */}
+            <div className="hidden gap-5 text-lg font-bold text-black lg:flex">
+              <a href="#" className={linkStyle}>
+                home
+              </a>
+              <a href="#projects" className={linkStyle}>
+                projects
+              </a>
+              <a href="#skills" className={linkStyle}>
+                skills
+              </a>
+              <a href="#contact" className={linkStyle}>
+                contact
+              </a>
+            </div>
+          </div>
+        </nav>
+      )}
+
       {/* Navbar */}
-      <nav className="animate__animated animate__bounceInDown flex bg-black">
+      <nav className="flex bg-black">
         <div className="mx-auto my-5 flex w-[80%] items-center justify-between">
           <div>
             <a href="#">
@@ -309,7 +355,6 @@ export default function Home() {
         </div>
       </div>
       {/* Projects Section */}
-
       <div id="projects" className="relative overflow-hidden bg-black">
         <div className="flex justify-normal">
           <div className="flex items-center justify-center">
@@ -362,7 +407,6 @@ export default function Home() {
         </div>
       </div>
       {/* Skills */}
-
       <div id="skills" className={bgMainColor + " relative overflow-hidden"}>
         <div className="flex justify-normal">
           <div className="flex items-center justify-center">
@@ -406,9 +450,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-
       {/* Contact */}
-
       <div
         id="contact"
         className="relative items-center justify-center space-y-10 overflow-hidden bg-white pb-25"
