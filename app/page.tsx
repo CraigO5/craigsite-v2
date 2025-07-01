@@ -1,103 +1,438 @@
+"use client";
 import Image from "next/image";
+import SmoothScroll from "@/components/custom/SmoothScroll";
+import { ContactCard } from "@/components/custom/ContactCard";
+import { Star } from "lucide-react";
+
+import "animate.css";
+import {
+  SiTypescript,
+  SiPython,
+  SiHtml5,
+  SiCss3,
+  SiNextdotjs,
+  SiReact,
+  SiGithub,
+  SiTailwindcss,
+  SiDocker,
+  SiAdobephotoshop,
+  SiAdobeillustrator,
+  SiBlender,
+  SiCplusplus,
+  SiUnity,
+  SiUnrealengine,
+  SiSupabase,
+  SiNodedotjs,
+  SiShadcnui,
+  SiLinkedin,
+} from "react-icons/si"; // or "react-icons/fa"
+import { FaFileAlt } from "react-icons/fa";
+const labeledIcons = [
+  // --- Languages ---
+
+  {
+    name: "C++",
+    icon: SiCplusplus,
+    description:
+      "Extension of C with object-oriented features for high-performance applications.",
+  },
+  {
+    name: "TypeScript",
+    icon: SiTypescript,
+    description: "Typed superset of JavaScript for scalable and robust apps.",
+  },
+  {
+    name: "Python",
+    icon: SiPython,
+    description:
+      "General-purpose language known for simplicity and readability.",
+  },
+  {
+    name: "HTML5",
+    icon: SiHtml5,
+    description: "Standard markup language for creating modern web pages.",
+  },
+  {
+    name: "CSS3",
+    icon: SiCss3,
+    description: "Stylesheet language used for designing responsive layouts.",
+  },
+
+  // --- Backend / Databases ---
+  {
+    name: "Supabase",
+    icon: SiSupabase,
+    description:
+      "Open-source Firebase alternative for building secure, scalable backends with Postgres.",
+  },
+  {
+    name: "Node.js",
+    icon: SiNodedotjs,
+    description:
+      "JavaScript runtime built on Chrome's V8 engine, ideal for building backend services.",
+  },
+
+  // --- Frameworks & Libraries ---
+  {
+    name: "React",
+    icon: SiReact,
+    description:
+      "JavaScript library for building interactive and component-based user interfaces.",
+  },
+  {
+    name: "Next.js",
+    icon: SiNextdotjs,
+    description:
+      "Full-stack React framework for building fast, server-rendered apps.",
+  },
+  {
+    name: "Tailwind CSS",
+    icon: SiTailwindcss,
+    description:
+      "Utility-first CSS framework for custom, responsive UI design.",
+  },
+  {
+    name: "shadcn/ui",
+    icon: SiShadcnui,
+    description:
+      "Beautifully designed, customizable React components built with Tailwind CSS and Radix UI.",
+  },
+
+  // --- DevOps & Developer Tools ---
+  {
+    name: "GitHub",
+    icon: SiGithub,
+    description:
+      "Platform for version control and collaborative software development using Git.",
+  },
+  {
+    name: "Docker",
+    icon: SiDocker,
+    description:
+      "Platform for containerizing applications and managing environments.",
+  },
+
+  // --- Design & Media ---
+  {
+    name: "Adobe Photoshop",
+    icon: SiAdobephotoshop,
+    description:
+      "Industry-standard tool for raster graphics and image editing.",
+  },
+  {
+    name: "Adobe Illustrator",
+    icon: SiAdobeillustrator,
+    description:
+      "Vector graphics software for logos, icons, and illustrations.",
+  },
+  {
+    name: "Blender",
+    icon: SiBlender,
+    description:
+      "Open-source 3D creation suite for modeling, animation, and rendering.",
+  },
+  {
+    name: "Unity",
+    icon: SiUnity,
+    description: "Cross-platform game engine for 2D/3D games and simulations.",
+  },
+  {
+    name: "Unreal Engine",
+    icon: SiUnrealengine,
+    description:
+      "High-fidelity game engine used for AAA games and virtual production.",
+  },
+];
+
+const projects = [
+  {
+    title: "Spyfall",
+    description:
+      "A web clone of the social deduction game Spyfall using Next.js and Supabase!",
+    image: "./spyfall.png",
+    link: "https://spyfall.craigo.live",
+  },
+  {
+    title: "Productivity Slime",
+    description:
+      "A Firefox extension live on the add-ons store to track time spent on unproductive tabs in the style of a video game slime.",
+    image: "./slime_sc.png",
+    link: "https://addons.mozilla.org/en-US/firefox/addon/productivity-slime/",
+  },
+  {
+    title: "Camelia",
+    description:
+      "A two-person web development startup focused creating stylish and responsive websites.",
+    image: "./camellia.png",
+    link: "https://camelia.work",
+  },
+  {
+    title: "News Template Presets",
+    description:
+      "A preset Firefox extension to automate article items when I worked as a news reporter.",
+    image: "./news.png",
+    link: "https://addons.mozilla.org/en-US/firefox/addon/news-template-presets/",
+  },
+  {
+    title: "Webbie Pet",
+    description:
+      "A tamagotchi style game created with JavaScript, HTML5 Canvas, SASS, Next.js, and Node.js.",
+    image: "./webbie-sc.png",
+    link: "https://craigsterr.github.io/webbie-pet",
+  },
+  {
+    title: "Kitty Clicker",
+    description: "A clicker game made entirely in React, HTML, and Javascript.",
+    image: "./kitty.png",
+    link: "https://craigsterr.github.io/kitty-clicker",
+  },
+];
 
 export default function Home() {
+  const bgMainColor = "bg-red-500";
+  const linkStyle = `hover:bg-red-500 hover:text-white rounded-2xl bg-white px-5 py-2 transition-all hover:scale-110 duration-300`;
+  const iconStyle =
+    "hover:scale-110 hover:bg-white hover:text-black transition-all duration-100";
+  const socialStyle =
+    "drop-shadow-md/25 hover:scale-120 hover:text-black transition-all duration-300";
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      <SmoothScroll />
+      {/* Navbar */}
+      <nav className="animate__animated animate__bounceInDown flex bg-black">
+        <div className="mx-auto my-5 flex w-[80%] items-center justify-between">
+          <div>
+            <a href="#">
+              <Image
+                src="./logo.png"
+                alt="Logo"
+                width={60}
+                height={60}
+                className="animate__animated animate__rubberBand drop-shadow-white/50 transition-all duration-300 hover:scale-130 hover:invert"
+              />
+            </a>
+          </div>
+          {/* Socials */}
+          <div className="hidden gap-5 text-lg font-bold text-black lg:flex">
+            <a href="#" className={linkStyle}>
+              home
+            </a>
+            <a href="#projects" className={linkStyle}>
+              projects
+            </a>
+            <a href="#skills" className={linkStyle}>
+              skills
+            </a>
+            <a href="#contact" className={linkStyle}>
+              contact
+            </a>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+      </nav>
+
+      {/* Home */}
+      <div>
+        {" "}
+        {/* Colored box */}
+        <div className={bgMainColor + " items-center space-y-7 pt-20"}>
+          {/* Black box */}
+          <div className="flex justify-center border-y-5 border-white bg-black">
+            <h1 className="hidden -skew-x-12 py-2 text-center text-8xl font-black text-white lg:block">
+              CRAIG ONDEVILLA
+            </h1>
+            <h1 className="block -skew-x-12 py-2 text-center text-8xl font-black text-white lg:hidden">
+              CRAIG
+            </h1>
+          </div>
+          <div className="group flex justify-center gap-7 pb-5">
+            <a
+              href="https://github.com/craigsterr"
+              className={socialStyle + " space-y-2"}
+            >
+              <SiGithub size={30} className="mx-auto" />
+              <h2 className="font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                Github
+              </h2>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/craig-ondevilla-8106b4191"
+              className={socialStyle + " space-y-2"}
+            >
+              <SiLinkedin size={30} className="mx-auto" />
+              <h2 className="font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                LinkedIn
+              </h2>
+            </a>
+            <a href="./resume.pdf" className={socialStyle + " space-y-2"}>
+              {" "}
+              <FaFileAlt size={30} className="mx-auto" />
+              <h2 className="font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                Resume
+              </h2>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div id="home" className="relative overflow-hidden bg-white">
+        <div className="flex flex-col items-center space-y-10">
+          <div className="w-[75%] rounded-2xl bg-black" />
+          {/* About Section */}
+          <Image src="./arrow.png" alt="Logo" width={20} height={20} />
+
+          <div className="mb-20 space-y-10 py-15 text-black">
+            <Image
+              src="./craig.jpg"
+              alt="Logo"
+              width={300}
+              height={300}
+              className="mx-auto rounded-full drop-shadow-md/25"
+            />
+            <h2 className="mx-auto w-[30%] text-center text-2xl font-black">
+              Hey, I'm Craig Ondevilla!
+            </h2>
+            <p className="mx-auto w-[80%] text-center text-xl lg:w-[30%]">
+              I'm a passionate programmer with a Bachelor of Science in Computer
+              Science from the University of Illinois Urbana-Champaign (UIUC). I
+              specialize in web development and design, and I love creating
+              clean, user-friendly digital experiences. Me and my friend are
+              currently working on Camelia, a web development startup providing
+              stylish and responsive websites for clients with small
+              businesses.{" "}
+            </p>
+          </div>
+        </div>
+        <div className="flex justify-end">
+          <div className="flex items-center justify-center">
+            <Star className="absolute h-100 w-100 stroke-[0.5] text-black lg:h-200 lg:w-200" />
+            <Star className="absolute h-50 w-50 stroke-1 text-black lg:h-100 lg:w-100" />
+          </div>
+        </div>
+      </div>
+      {/* Projects Section */}
+
+      <div id="projects" className="relative overflow-hidden bg-black">
+        <div className="flex justify-normal">
+          <div className="flex items-center justify-center">
+            <Star className="absolute h-100 w-100 stroke-[0.5] text-white lg:h-200 lg:w-200" />
+            <Star className="absolute h-50 w-50 stroke-1 text-white lg:h-100 lg:w-100" />
+          </div>
+        </div>
+
+        <Image
+          src="./arrow_white.png"
+          alt="Logo"
+          width={20}
+          height={20}
+          className="mx-auto pt-10"
+        />
+        <div className="p-20">
+          {/* Projects */}
+          <h2 className="mb-20 text-center text-3xl font-bold">Projects</h2>
+          <div className="mx-auto flex w-[100%] flex-wrap justify-center gap-6 md:w-[50%]">
+            {projects.map((project, idx) => (
+              <a
+                key={idx}
+                href={project.link}
+                className="group flex h-60 w-60 -skew-x-12 items-center justify-center border-4 border-white bg-black transition-transform duration-100 hover:scale-110 hover:bg-red-700"
+              >
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover opacity-25"
+                  sizes="320px"
+                />
+                <div className="absolute p-10">
+                  <h1 className="mx-auto text-center text-2xl font-bold group-hover:hidden">
+                    {project.title}
+                  </h1>
+                  <p className="hidden text-xl group-hover:block">
+                    {project.description}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+        <div className="flex justify-end">
+          <div className="flex items-center justify-center">
+            <Star className="absolute h-100 w-100 stroke-[0.5] text-white lg:h-200 lg:w-200" />
+            <Star className="absolute h-50 w-50 stroke-1 text-white lg:h-100 lg:w-100" />
+          </div>
+        </div>
+      </div>
+      {/* Skills */}
+
+      <div id="skills" className={bgMainColor + " relative overflow-hidden"}>
+        <div className="flex justify-normal">
+          <div className="flex items-center justify-center">
+            <Star className="absolute h-100 w-100 stroke-[0.5] text-black lg:h-200 lg:w-200" />
+            <Star className="absolute h-50 w-50 stroke-1 text-black lg:h-100 lg:w-100" />
+          </div>
+        </div>
+        <Image
+          src="./arrow.png"
+          alt="Logo"
+          width={20}
+          height={20}
+          className="mx-auto pt-10"
+        />
+        <h2 className="mt-20 text-center text-4xl font-bold text-black">
+          Skills
+        </h2>
+        {/* Skills cards */}
+        <div className="py-20">
+          <div className="mx-auto flex w-[90%] flex-wrap justify-center gap-10 lg:w-[70%]">
+            {labeledIcons.map(({ icon: Icon, name, description }, i) => (
+              <div
+                key={i}
+                className={
+                  "w-25 space-y-3 rounded-2xl bg-black lg:w-50 " + iconStyle
+                }
+              >
+                <div className="flex flex-col gap-5 p-4">
+                  <Icon size={50} className="mx-auto" />
+                  <h2 className="hidden font-black lg:block">{name}</h2>
+                  <p className="hidden lg:block">{description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="flex justify-end">
+          <div className="flex items-center justify-center">
+            <Star className="absolute h-100 w-100 stroke-[0.5] text-black lg:h-200 lg:w-200" />
+            <Star className="absolute h-50 w-50 stroke-1 text-black lg:h-100 lg:w-100" />
+          </div>
+        </div>
+      </div>
+
+      {/* Contact */}
+
+      <div
+        id="contact"
+        className="relative items-center justify-center space-y-10 overflow-hidden bg-white pb-25"
+      >
+        <div className="flex justify-normal">
+          <div className="flex items-center justify-center">
+            <Star className="absolute h-100 w-100 stroke-[0.5] text-black lg:h-200 lg:w-200" />
+            <Star className="absolute h-50 w-50 stroke-1 text-black lg:h-100 lg:w-100" />
+          </div>
+        </div>
+        <Image
+          src="./arrow.png"
+          alt="Logo"
+          width={20}
+          height={20}
+          className="mx-auto pt-10"
+        />
+        <h2 className="my-10 text-center text-4xl font-bold text-black">
+          Contact Me!
+        </h2>
+        <div className="flex justify-center">
+          <ContactCard />
+        </div>
+      </div>
+    </>
   );
 }
