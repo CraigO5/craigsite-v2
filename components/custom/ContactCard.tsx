@@ -51,7 +51,7 @@ export function ContactCard() {
                 required
               />
             </div>
-            <div className="grid gap-2">
+            <div className="mb-5 grid gap-2">
               <Label htmlFor="message">Message</Label>
               <Textarea
                 id="message"

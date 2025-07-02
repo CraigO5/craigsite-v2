@@ -68,6 +68,20 @@ html {
   font-display: swap;
 }
 
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: inline-block;
+  animation: marquee 20s linear infinite;
+}
+
 .arrow-up {
   width: 0;
   height: 0;

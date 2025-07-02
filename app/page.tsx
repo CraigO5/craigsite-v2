@@ -191,62 +191,36 @@ const projects = [
 
 export default function Home() {
   const bgMainColor = "bg-red-500";
-  const linkStyle = `hover:bg-red-500 hover:text-white rounded-2xl bg-white px-5 py-2 transition-all hover:scale-110 duration-300`;
+  const linkStyle = `hover:bg-red-500 hover:text-white rounded-2xl lg:bg-white px-2 lg:px-5 lg:py-2 transition-all hover:scale-110 duration-300`;
   const iconStyle =
     "hover:scale-110 hover:bg-white hover:text-black transition-all duration-100";
   const socialStyle =
     "drop-shadow-md/25 hover:scale-120 hover:text-black transition-all duration-300";
 
   const [isScrolled, setIsScrolled] = useState(false);
+  const [navAnimation, setNavAnimation] = useState(
+    "animate__animated animate__fadeInDown",
+  );
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 100);
+      setIsScrolled(window.scrollY > 200);
+      if (isScrolled) {
+        setNavAnimation("animate__animated animate__fadeInDown");
+      } else {
+        setNavAnimation("animate__animated animate__fadeOutUp");
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isScrolled]);
 
   return (
     <>
       <SmoothScroll />
-      {isScrolled && (
-        <nav className="animate__animated animate__bounceInDown fixed z-1 flex w-full bg-black">
-          <div className="mx-auto my-5 flex w-[80%] items-center justify-between">
-            <div>
-              <a href="#">
-                <Image
-                  src="./logo.png"
-                  alt="Logo"
-                  width={60}
-                  height={60}
-                  className="animate__animated animate__rubberBand drop-shadow-white/50 transition-all duration-300 hover:scale-130 hover:invert"
-                />
-              </a>
-            </div>
-            {/* Socials */}
-            <div className="hidden gap-5 text-lg font-bold text-black lg:flex">
-              <a href="#" className={linkStyle}>
-                home
-              </a>
-              <a href="#projects" className={linkStyle}>
-                projects
-              </a>
-              <a href="#skills" className={linkStyle}>
-                skills
-              </a>
-              <a href="#contact" className={linkStyle}>
-                contact
-              </a>
-            </div>
-          </div>
-        </nav>
-      )}
-
-      {/* Navbar */}
-      <nav className="flex bg-black">
-        <div className="mx-auto my-5 flex w-[80%] items-center justify-between">
+      <nav className={"fixed z-1 flex w-full bg-black " + navAnimation}>
+        <div className="mx-auto my-5 flex w-[80%] items-center justify-center md:justify-between">
           <div>
             <a href="#">
               <Image
@@ -254,12 +228,47 @@ export default function Home() {
                 alt="Logo"
                 width={60}
                 height={60}
-                className="animate__animated animate__rubberBand drop-shadow-white/50 transition-all duration-300 hover:scale-130 hover:invert"
+                className={
+                  "animate__animated animate__rubberBand hidden drop-shadow-white/50 transition-all duration-300 hover:scale-130 hover:invert md:flex " +
+                  (isScrolled ? "" : "animate__animated animate__fadeOutUp")
+                }
               />
             </a>
           </div>
           {/* Socials */}
-          <div className="hidden gap-5 text-lg font-bold text-black lg:flex">
+          <div className="gap-5 text-lg font-bold text-white lg:flex lg:text-black">
+            <a href="#" className={linkStyle}>
+              home
+            </a>
+            <a href="#projects" className={linkStyle}>
+              projects
+            </a>
+            <a href="#skills" className={linkStyle}>
+              skills
+            </a>
+            <a href="#contact" className={linkStyle}>
+              contact
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      {/* Navbar */}
+      <nav className="flex bg-black">
+        <div className="mx-auto my-5 flex w-[80%] items-center justify-center md:justify-between">
+          <div>
+            <a href="#">
+              <Image
+                src="./logo.png"
+                alt="Logo"
+                width={60}
+                height={60}
+                className="animate__animated animate__rubberBand hidden drop-shadow-white/50 transition-all duration-300 hover:scale-130 hover:invert md:flex"
+              />
+            </a>
+          </div>
+          {/* Socials */}
+          <div className="flex gap-2 text-lg font-bold text-white lg:flex lg:gap-5 lg:text-black">
             <a href="#" className={linkStyle}>
               home
             </a>
@@ -282,13 +291,18 @@ export default function Home() {
         {/* Colored box */}
         <div className={bgMainColor + " items-center space-y-7 pt-20"}>
           {/* Black box */}
-          <div className="flex justify-center border-y-5 border-white bg-black">
-            <h1 className="hidden -skew-x-12 py-2 text-center text-8xl font-black text-white lg:block">
-              CRAIG ONDEVILLA
-            </h1>
-            <h1 className="block -skew-x-12 py-2 text-center text-8xl font-black text-white lg:hidden">
-              CRAIG
-            </h1>
+          {/* Black box with repeating name */}
+          <div className="relative overflow-hidden border-y-5 border-white bg-black py-4">
+            <div className="animate-marquee whitespace-nowrap">
+              {[...Array(10)].map((_, i) => (
+                <span
+                  key={i}
+                  className="mx-8 inline-block -skew-x-12 text-4xl font-black text-white lg:text-8xl"
+                >
+                  CRAIG ONDEVILLA
+                </span>
+              ))}
+            </div>
           </div>
           <div className="group flex justify-center gap-7 pb-5">
             <a
