@@ -198,23 +198,22 @@ export default function Home() {
     "drop-shadow-md/25 hover:scale-120 hover:text-black transition-all duration-300";
 
   const [isScrolled, setIsScrolled] = useState(false);
-  const [navAnimation, setNavAnimation] = useState(
-    "animate__animated animate__fadeInDown",
-  );
+  const [navAnimation, setNavAnimation] = useState("");
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 200);
-      if (isScrolled) {
-        setNavAnimation("animate__animated animate__fadeInDown");
-      } else {
-        setNavAnimation("animate__animated animate__fadeOutUp");
-      }
+      const scrolled = window.scrollY > 200;
+      setIsScrolled(scrolled);
+      setNavAnimation(
+        scrolled
+          ? "animate__animated animate__fadeInDown"
+          : "animate__animated animate__fadeOutUp",
+      );
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isScrolled]);
+  }, []);
 
   return (
     <>
@@ -228,10 +227,11 @@ export default function Home() {
                 alt="Logo"
                 width={60}
                 height={60}
-                className={
-                  "animate__animated animate__rubberBand hidden drop-shadow-white/50 transition-all duration-300 hover:scale-130 hover:invert md:flex " +
-                  (isScrolled ? "" : "animate__animated animate__fadeOutUp")
-                }
+                className={`hidden drop-shadow-white/50 transition-all duration-300 hover:scale-130 hover:invert md:flex ${
+                  isScrolled
+                    ? "animate__animated animate__fadeInDown"
+                    : "opacity-100" // visible by default, no fade-out
+                }`}
               />
             </a>
           </div>
@@ -263,7 +263,11 @@ export default function Home() {
                 alt="Logo"
                 width={60}
                 height={60}
-                className="animate__animated animate__rubberBand hidden drop-shadow-white/50 transition-all duration-300 hover:scale-130 hover:invert md:flex"
+                className={`hidden drop-shadow-white/50 transition-all duration-300 hover:scale-130 hover:invert md:flex ${
+                  isScrolled
+                    ? "animate__animated animate__fadeInDown"
+                    : "opacity-100" // visible by default, no fade-out
+                }`}
               />
             </a>
           </div>
