@@ -275,6 +275,9 @@ export default function Home() {
             <a href="#contact" className={linkStyle}>
               contact
             </a>
+            <a href="/blog" className={linkStyle}>
+              blog
+            </a>
           </div>
         </div>
       </nav>
@@ -310,6 +313,9 @@ export default function Home() {
             </a>
             <a href="#contact" className={linkStyle}>
               contact
+            </a>
+            <a href="/blog" className={linkStyle}>
+              blog
             </a>
           </div>
         </div>
