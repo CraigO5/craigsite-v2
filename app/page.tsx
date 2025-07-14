@@ -147,6 +147,12 @@ const labeledIcons = [
 
 const projects = [
   {
+    title: "CoverMe",
+    description: "An AI Cover Letter generator using Next.js and ChatGPT!",
+    image: "./coverme.png",
+    link: "https://coverme.craigo.live",
+  },
+  {
     title: "Spyfall",
     description:
       "A web clone of the social deduction game Spyfall using Next.js and Supabase!",
@@ -186,6 +192,26 @@ const projects = [
     description: "A clicker game made entirely in React, HTML, and Javascript.",
     image: "./kitty.png",
     link: "https://craigsterr.github.io/kitty-clicker",
+  },
+  {
+    title: "TURBOHYPER",
+    description: "A bullet hell game made in Unity/C#. (COMING SOON)",
+    image: "./logo.png",
+    link: "",
+  },
+  {
+    title: "Trial N' Error",
+    description:
+      "A problem solving app focused on finding the variables to success made in Next.js. (COMING SOON)",
+    image: "./logo.png",
+    link: "https://github.com/craigsterr/trial-n-error",
+  },
+  {
+    title: "Reddit Grabber",
+    description:
+      "Search tool that grabs the top Reddit comments to a search. (COMING SOON)",
+    image: "./logo.png",
+    link: "",
   },
 ];
 
@@ -391,7 +417,7 @@ export default function Home() {
         <div className="p-20">
           {/* Projects */}
           <h2 className="mb-20 text-center text-3xl font-bold">Projects</h2>
-          <div className="mx-auto flex w-[100%] flex-wrap justify-center gap-6 md:w-[50%]">
+          <div className="mx-auto flex w-[100%] flex-wrap justify-center gap-6 md:w-[75%]">
             {projects.map((project, idx) => (
               <a
                 key={idx}
@@ -402,7 +428,7 @@ export default function Home() {
                   src={project.image}
                   alt={project.title}
                   fill
-                  className="object-cover opacity-25"
+                  className="object-cover opacity-30"
                   sizes="320px"
                 />
                 <div className="absolute p-10">
