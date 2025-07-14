@@ -225,14 +225,14 @@ export default function Home() {
           height={20}
           className="mx-auto pt-10"
         />
-        <div className="p-20">
+        <div className="sm:p-20">
           {/* Posts */}
           <h2 className="mb-20 text-center text-3xl font-bold">Posts</h2>
-          <div className="mx-auto flex w-[100%] flex-col items-center gap-6 md:w-[75%]">
+          <div className="mx-auto flex w-[100%] flex-col items-center gap-6 sm:w-[75%]">
             {posts.map((post, i) => (
               <div
                 key={i}
-                className="max-w-200 space-y-5 rounded-2xl border-2 border-white/50 p-10 text-white"
+                className="max-w-full space-y-5 rounded-2xl border-2 border-white/50 p-10 text-white md:max-w-200"
               >
                 <div className="flex items-center justify-between">
                   <h3 className="text-xl font-bold">{post.title}</h3>
