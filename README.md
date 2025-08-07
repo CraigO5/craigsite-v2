@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# craigsite-v2
 
-## Getting Started
+**craigsite-v2** is my personal developer website and blog, built with Next.js and Tailwind CSS. It showcases my work, technical writing, and current projects. Designed for speed, clarity, and responsiveness across devices.
 
-First, run the development server:
+## 🌐 Live Site
+
+[Visit craigo.live](https://craigo.live)
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js (App Router)
+- **Styling:** Tailwind CSS
+- **Language:** TypeScript
+- **Hosting:** Vercel
+
+## 🎨 Features
+
+- Fully responsive layout with mobile optimizations
+- Animated landing elements using Framer Motion
+- Dynamic blog system with Markdown support
+- Clean, minimal design system for readability
+- SEO and social sharing metadata support
+
+## 🚀 Getting Started
+
+Clone the repo and run locally:
 
 ```bash
+git clone https://github.com/craigsterr/craigsite-v2.git
+cd craigsite-v2
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+Visit http://localhost:3000 to view the site.
+📁 Project Structure
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+    app/: Route-based files (e.g. homepage, blog posts)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    components/: Reusable UI components
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    lib/: Utility functions
 
-## Learn More
+    public/: Static files and images
 
-To learn more about Next.js, take a look at the following resources:
+✍️ Blog System
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Posts are written in MDX and rendered dynamically. The blog includes dev write-ups, project deep dives, and career insights.
+📄 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT License
