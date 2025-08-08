@@ -1,10 +1,9 @@
 "use client";
 import Image from "next/image";
+import { Parallax, ParallaxProvider } from "react-scroll-parallax";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAnglesDown } from "@fortawesome/free-solid-svg-icons";
 import SmoothScroll from "@/components/custom/SmoothScroll";
-import { ContactCard } from "@/components/custom/ContactCard";
-import { Star } from "lucide-react";
-
-import "animate.css";
 import {
   SiTypescript,
   SiPython,
@@ -27,7 +26,10 @@ import {
   SiLinkedin,
 } from "react-icons/si"; // or "react-icons/fa"
 import { FaFileAlt } from "react-icons/fa";
-import { useEffect, useState } from "react";
+import NavBar from "@/components/custom/NavBar";
+import Link from "next/link";
+import { useState } from "react";
+
 const labeledIcons = [
   // --- Languages ---
 
@@ -144,7 +146,6 @@ const labeledIcons = [
       "High-fidelity game engine used for AAA games and virtual production.",
   },
 ];
-
 const projects = [
   {
     title: "CoverMe",
@@ -216,129 +217,60 @@ const projects = [
 ];
 
 export default function Home() {
-  const bgMainColor = "bg-red-500";
-  const linkStyle = `hover:bg-red-500 hover:text-white rounded-2xl lg:bg-white px-2 lg:px-5 lg:py-2 transition-all hover:scale-110 duration-300`;
+  const [currentProjectId, setCurrentProjectId] = useState(0);
+
   const iconStyle =
     "hover:scale-110 hover:bg-white hover:text-black transition-all duration-100";
+  const buttonStyle =
+    "px-4 py-2 text-white rounded-md hover:bg-red-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-3xl border border-white/20  bg-gradient-to-br from-white/20 via-white/5 to-white/10 cursor-pointer hover:-translate-y-0.5 hover:-translate-x-0.5 active:translate-y-0 active:translate-x-0 hover:shadow-[4px_4px_0px_#000000] active:shadow-none transition duration-100 mx-1 border-2 ";
   const socialStyle =
-    "drop-shadow-md/25 hover:scale-120 hover:text-black transition-all duration-300";
+    "drop-shadow-md/25 hover:scale-120 hover:text-red-500 transition-all duration-300";
 
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [navAnimation, setNavAnimation] = useState("");
+  const wrapAround = (id: number) => {
+    let newId = id;
+    if (newId < 0) {
+      newId = projects.length - 1;
+    }
+    if (newId >= projects.length) {
+      newId = 0;
+    }
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.scrollY > 200;
-      setIsScrolled(scrolled);
-      setNavAnimation(
-        scrolled
-          ? "animate__animated animate__fadeInDown"
-          : "animate__animated animate__fadeOutUp",
-      );
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    return newId;
+  };
 
   return (
     <>
+      <div className="flex justify-center">
+        <NavBar />
+      </div>
       <SmoothScroll />
-      <nav className={"fixed z-1 flex w-full bg-black " + navAnimation}>
-        <div className="mx-auto my-5 flex w-[80%] items-center justify-center md:justify-between">
-          <div>
-            <a href="#">
+      <ParallaxProvider>
+        {/* Title Section */}
+        <section
+          id="home"
+          className="relative flex w-full flex-col overflow-hidden"
+        >
+          <Parallax translateY={[-50, 50]} className="absolute inset-0 z-0">
+            <div className="flex h-full w-full items-center justify-center bg-black opacity-50">
               <Image
-                src="./logo.png"
-                alt="Logo"
-                width={60}
-                height={60}
-                className={`hidden drop-shadow-white/50 transition-all duration-300 hover:scale-130 hover:invert md:flex ${
-                  isScrolled
-                    ? "animate__animated animate__fadeInDown"
-                    : "opacity-100" // visible by default, no fade-out
-                }`}
+                alt="Craig Ondevilla"
+                src="/square bg.png"
+                width={1280}
+                height={1280}
+                className="w-full rounded-full object-cover"
               />
-            </a>
-          </div>
-          {/* Socials */}
-          <div className="gap-5 text-lg font-bold text-white lg:flex lg:text-black">
-            <a href="#" className={linkStyle}>
-              home
-            </a>
-            <a href="#projects" className={linkStyle}>
-              projects
-            </a>
-            <a href="#skills" className={linkStyle}>
-              skills
-            </a>
-            <a href="#contact" className={linkStyle}>
-              contact
-            </a>
-            <a href="/blog" className={linkStyle}>
-              blog
-            </a>
-          </div>
-        </div>
-      </nav>
-
-      {/* Navbar */}
-      <nav className="flex bg-black">
-        <div className="mx-auto my-5 flex w-[80%] items-center justify-center md:justify-between">
-          <div>
-            <a href="#">
-              <Image
-                src="./logo.png"
-                alt="Logo"
-                width={60}
-                height={60}
-                className={`hidden drop-shadow-white/50 transition-all duration-300 hover:scale-130 hover:invert md:flex ${
-                  isScrolled
-                    ? "animate__animated animate__fadeInDown"
-                    : "opacity-100" // visible by default, no fade-out
-                }`}
-              />
-            </a>
-          </div>
-          {/* Socials */}
-          <div className="flex gap-2 text-lg font-bold text-white lg:flex lg:gap-5 lg:text-black">
-            <a href="#" className={linkStyle}>
-              home
-            </a>
-            <a href="#projects" className={linkStyle}>
-              projects
-            </a>
-            <a href="#skills" className={linkStyle}>
-              skills
-            </a>
-            <a href="#contact" className={linkStyle}>
-              contact
-            </a>
-            <a href="/blog" className={linkStyle}>
-              blog
-            </a>
-          </div>
-        </div>
-      </nav>
-
-      {/* Home */}
-      <div>
-        {" "}
-        {/* Colored box */}
-        <div className={bgMainColor + " items-center space-y-7 pt-20"}>
-          {/* Black box */}
-          {/* Black box with repeating name */}
-          <div className="relative overflow-hidden border-y-5 border-white bg-black py-4">
-            <div className="animate-marquee whitespace-nowrap">
-              {[...Array(10)].map((_, i) => (
-                <span
-                  key={i}
-                  className="mx-8 inline-block -skew-x-12 text-4xl font-black text-white lg:text-8xl"
-                >
-                  CRAIG ONDEVILLA
-                </span>
-              ))}
             </div>
+          </Parallax>
+          <div className="relative z-10 mx-auto mt-20 mb-20 flex md:mb-40">
+            <h1 className="m-10 font-bold">
+              <span className="mx-auto inline lg:hidden">CRAIG</span>
+              <span className="hidden lg:inline">CRAIG ONDEVILLA</span>
+            </h1>
+          </div>
+          <div className="relative z-10 mx-auto mb-10 flex text-[3rem] font-bold">
+            <Link href="#about" className={buttonStyle}>
+              click to explore
+            </Link>
           </div>
           <div className="group flex justify-center gap-7 pb-5">
             <a
@@ -346,185 +278,181 @@ export default function Home() {
               className={socialStyle + " space-y-2"}
             >
               <SiGithub size={30} className="mx-auto" />
-              <h2 className="font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <p className="font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 Github
-              </h2>
+              </p>
             </a>
             <a
               href="https://www.linkedin.com/in/craig-ondevilla-8106b4191"
               className={socialStyle + " space-y-2"}
             >
               <SiLinkedin size={30} className="mx-auto" />
-              <h2 className="font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <p className="font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 LinkedIn
-              </h2>
+              </p>
             </a>
             <a href="./resume.pdf" className={socialStyle + " space-y-2"}>
               {" "}
               <FaFileAlt size={30} className="mx-auto" />
-              <h2 className="font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              <p className="font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 Resume
-              </h2>
+              </p>
             </a>
           </div>
-        </div>
-      </div>
-      <div id="home" className="relative overflow-hidden bg-white">
-        <div className="flex flex-col items-center space-y-10">
-          <div className="w-[75%] rounded-2xl bg-black" />
-          {/* About Section */}
-          <Image src="./arrow.png" alt="Logo" width={20} height={20} />
 
-          <div className="mb-20 space-y-10 py-15 text-black">
-            <Image
-              src="./craig.jpg"
-              alt="Logo"
-              width={300}
-              height={300}
-              className="mx-auto rounded-full drop-shadow-md/25"
-            />
-            <h2 className="mx-auto w-[30%] text-center text-2xl font-black">
-              Hey, I'm Craig Ondevilla!
-            </h2>
-            <p className="mx-auto w-[80%] text-center text-xl lg:w-[30%]">
-              I'm a passionate programmer with a Bachelor of Science in Computer
-              Science from the University of Illinois Urbana-Champaign (UIUC). I
-              specialize in web development and design, and I love creating
-              clean, user-friendly digital experiences. Me and my friend are
-              currently working on Camelia, a web development startup providing
-              stylish and responsive websites for clients with small
-              businesses.{" "}
-            </p>
+          <div className="relative z-10 mx-auto mt-auto mb-10 flex">
+            <FontAwesomeIcon icon={faAnglesDown} size="2x" />
           </div>
-        </div>
-        <div className="flex justify-end">
-          <div className="flex items-center justify-center">
-            <Star className="absolute h-100 w-100 stroke-[0.5] text-black lg:h-200 lg:w-200" />
-            <Star className="absolute h-50 w-50 stroke-1 text-black lg:h-100 lg:w-100" />
+        </section>
+        {/* About me section */}
+        <section id="about">
+          <div className="relative z-10 flex h-full flex-col bg-red-500 p-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="mb-10 lg:mb-0 lg:w-1/2 lg:p-10">
+              <h2 className="font-bold text-shadow-xs">ABOUT ME</h2>
+              <p className="text-2xl">
+                I'm a passionate programmer with a Bachelor of Science in
+                Computer Science from the University of Illinois
+                Urbana-Champaign (UIUC). I specialize in web development and
+                design, and I love creating clean, user-friendly digital
+                experiences. Me and my friend are currently working on Camelia,
+                a web development startup providing stylish and responsive
+                websites for clients with small businesses.
+              </p>
+            </div>
+            <div className="flex justify-center lg:w-1/2">
+              <Image
+                alt="Craig Ondevilla"
+                src="/craig.jpg"
+                width={700}
+                height={700}
+                className="h-auto w-full max-w-xs rounded-full sm:max-w-sm md:max-w-md lg:max-w-lg"
+              />
+            </div>
           </div>
-        </div>
-      </div>
-      {/* Projects Section */}
-      <div id="projects" className="relative overflow-hidden bg-black">
-        <div className="flex justify-normal">
-          <div className="flex items-center justify-center">
-            <Star className="absolute h-100 w-100 stroke-[0.5] text-white lg:h-200 lg:w-200" />
-            <Star className="absolute h-50 w-50 stroke-1 text-white lg:h-100 lg:w-100" />
-          </div>
-        </div>
-
-        <Image
-          src="./arrow_white.png"
-          alt="Logo"
-          width={20}
-          height={20}
-          className="mx-auto pt-10"
-        />
-        <div className="p-20">
-          {/* Projects */}
-          <h2 className="mb-20 text-center text-3xl font-bold">Projects</h2>
-          <div className="mx-auto flex w-[100%] flex-wrap justify-center gap-6 md:w-[75%]">
-            {projects.map((project, idx) => (
+        </section>{" "}
+        {/* Projects Section */}
+        <section id="projects" className="relative overflow-hidden">
+          <Parallax translateY={[-50, 50]} className="absolute inset-0">
+            <div className="flex h-full w-full items-center justify-center">
+              <Image
+                alt={projects[currentProjectId].title}
+                src={projects[currentProjectId].image}
+                width={1080}
+                height={1080}
+                className="rounded-2xl object-cover opacity-50 drop-shadow-2xl"
+              />
+            </div>
+          </Parallax>
+          <div className="relative m-10 flex flex-col">
+            <div className="z-10 mb-50 rounded-2xl text-shadow-xs">
+              <h2 className="font-bold">PROJECTS</h2>
+              <h3 className="text-[2rem] font-bold md:text-[4rem]">
+                {projects[currentProjectId].title}
+              </h3>
+              <p className="mb-10 text-2xl">
+                {projects[currentProjectId].description}
+              </p>
               <a
-                key={idx}
-                href={project.link}
-                className="group flex h-60 w-60 -skew-x-12 items-center justify-center border-4 border-white bg-black transition-transform duration-100 hover:scale-110 hover:bg-red-700"
+                href={projects[currentProjectId].link}
+                className={buttonStyle + " text-[3rem] font-bold"}
               >
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  fill
-                  className="object-cover opacity-30"
-                  sizes="320px"
-                />
-                <div className="absolute p-10">
-                  <h1 className="mx-auto text-center text-2xl font-bold group-hover:hidden">
-                    {project.title}
-                  </h1>
-                  <p className="hidden text-xl group-hover:block">
-                    {project.description}
-                  </p>
-                </div>
+                check it out!
               </a>
-            ))}
-          </div>
-        </div>
-        <div className="flex justify-end">
-          <div className="flex items-center justify-center">
-            <Star className="absolute h-100 w-100 stroke-[0.5] text-white lg:h-200 lg:w-200" />
-            <Star className="absolute h-50 w-50 stroke-1 text-white lg:h-100 lg:w-100" />
-          </div>
-        </div>
-      </div>
-      {/* Skills */}
-      <div id="skills" className={bgMainColor + " relative overflow-hidden"}>
-        <div className="flex justify-normal">
-          <div className="flex items-center justify-center">
-            <Star className="absolute h-100 w-100 stroke-[0.5] text-black lg:h-200 lg:w-200" />
-            <Star className="absolute h-50 w-50 stroke-1 text-black lg:h-100 lg:w-100" />
-          </div>
-        </div>
-        <Image
-          src="./arrow.png"
-          alt="Logo"
-          width={20}
-          height={20}
-          className="mx-auto pt-10"
-        />
-        <h2 className="mt-20 text-center text-4xl font-bold text-black">
-          Skills
-        </h2>
-        {/* Skills cards */}
-        <div className="py-20">
-          <div className="mx-auto flex w-[90%] flex-wrap justify-center gap-10 lg:w-[70%]">
-            {labeledIcons.map(({ icon: Icon, name, description }, i) => (
-              <div
-                key={i}
-                className={
-                  "w-25 space-y-3 rounded-2xl bg-black lg:w-50 " + iconStyle
-                }
-              >
-                <div className="flex flex-col gap-5 p-4">
-                  <Icon size={50} className="mx-auto" />
-                  <h2 className="hidden font-black lg:block">{name}</h2>
-                  <p className="hidden lg:block">{description}</p>
-                </div>
+            </div>
+
+            <div className="mx-auto mt-auto mb-10 flex items-center gap-10">
+              <FontAwesomeIcon
+                icon={faAnglesDown}
+                size="3x"
+                onClick={() => setCurrentProjectId((id) => wrapAround(id - 1))}
+                className="relative z-10 my-auto flex rotate-90 duration-300 hover:scale-110 hover:cursor-pointer"
+              />
+              <div className="hidden h-32 w-64 rounded-2xl lg:block">
+                <Image
+                  alt={projects[wrapAround(currentProjectId - 1)].title}
+                  src={projects[wrapAround(currentProjectId - 1)].image}
+                  width={1280}
+                  height={720}
+                  onClick={() =>
+                    setCurrentProjectId((id) => wrapAround(id - 1))
+                  }
+                  className="h-full w-full rounded-2xl border border-white/4 object-cover drop-shadow-2xl duration-300 hover:scale-105 hover:cursor-pointer"
+                />
               </div>
-            ))}
+              <div className="hidden h-32 w-64 rounded-2xl lg:block">
+                <Image
+                  alt={projects[currentProjectId].title}
+                  src={projects[currentProjectId].image}
+                  width={1280}
+                  height={720}
+                  className="h-full w-full scale-90 rounded-2xl border border-white/4 object-cover drop-shadow-2xl duration-300 lg:scale-115"
+                />
+              </div>
+              <div className="hidden h-32 w-64 rounded-2xl lg:block">
+                <Image
+                  alt={projects[wrapAround(currentProjectId + 1)].title}
+                  src={projects[wrapAround(currentProjectId + 1)].image}
+                  width={1280}
+                  height={720}
+                  onClick={() =>
+                    setCurrentProjectId((id) => wrapAround(id + 1))
+                  }
+                  className="h-full w-full rounded-2xl border border-white/4 object-cover drop-shadow-2xl duration-300 hover:scale-105 hover:cursor-pointer"
+                />
+              </div>
+
+              <FontAwesomeIcon
+                icon={faAnglesDown}
+                size="3x"
+                onClick={() => setCurrentProjectId((id) => wrapAround(id - 1))}
+                className="relative z-10 my-auto flex -rotate-90 duration-300 hover:scale-110 hover:cursor-pointer"
+              />
+            </div>
           </div>
-        </div>
-        <div className="flex justify-end">
-          <div className="flex items-center justify-center">
-            <Star className="absolute h-100 w-100 stroke-[0.5] text-black lg:h-200 lg:w-200" />
-            <Star className="absolute h-50 w-50 stroke-1 text-black lg:h-100 lg:w-100" />
+        </section>
+        <section id="skills">
+          <div className="relative z-10 h-full bg-red-500 p-10">
+            <h2 className="font-bold text-shadow-xs">SKILLS</h2>
+            <div className="py-20">
+              <div className="mx-auto flex w-[90%] flex-wrap justify-center gap-10 lg:w-[70%]">
+                {labeledIcons.map(({ icon: Icon, name, description }, i) => (
+                  <div
+                    key={i}
+                    className={
+                      "w-25 space-y-3 rounded-2xl bg-black lg:w-50 " + iconStyle
+                    }
+                  >
+                    <div className="flex flex-col gap-5 p-4">
+                      <Icon size={50} className="mx-auto" />
+                      <h3 className="hidden font-black lg:block">{name}</h3>
+                      <p className="hidden lg:block">{description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      {/* Contact */}
-      <div
-        id="contact"
-        className="relative items-center justify-center space-y-10 overflow-hidden bg-white pb-25"
-      >
-        <div className="flex justify-normal">
-          <div className="flex items-center justify-center">
-            <Star className="absolute h-100 w-100 stroke-[0.5] text-black lg:h-200 lg:w-200" />
-            <Star className="absolute h-50 w-50 stroke-1 text-black lg:h-100 lg:w-100" />
+        </section>
+        <section id="contact">
+          <div className="relative z-10 flex h-full flex-col items-center bg-black p-30">
+            <h2 className="font-bold text-shadow-xs">CONTACT</h2>
+            <div className="space-y-10 rounded-2xl border p-10">
+              <h3 className="text-[3rem] font-bold">Let's get in touch!</h3>
+              <p className="max-w-lg text-lg">
+                I’m always excited to collaborate on creative projects, chat
+                about tech, or discuss opportunities. Drop me a message — I’ll
+                get back to you as soon as I can.
+              </p>
+              <a
+                href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=craig.brdt505@gmail.com"
+                className="text-xl text-blue-500"
+              >
+                craig.brdt505@gmail.com
+              </a>
+            </div>
           </div>
-        </div>
-        <Image
-          src="./arrow.png"
-          alt="Logo"
-          width={20}
-          height={20}
-          className="mx-auto pt-10"
-        />
-        <h2 className="my-10 text-center text-4xl font-bold text-black">
-          Contact Me!
-        </h2>
-        <div className="flex justify-center">
-          <ContactCard />
-        </div>
-      </div>
+        </section>
+      </ParallaxProvider>
     </>
   );
 }

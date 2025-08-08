@@ -176,4 +176,10 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+  h1 {
+    @apply text-[7rem] md:text-[10rem];
+  }
+  h2 {
+    @apply text-[4rem] md:text-[8rem];
+  }
 }

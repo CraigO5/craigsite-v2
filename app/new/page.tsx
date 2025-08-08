@@ -28,6 +28,7 @@ import {
 import { FaFileAlt } from "react-icons/fa";
 import NavBar from "@/components/custom/NavBar";
 import Link from "next/link";
+import { useState } from "react";
 
 const labeledIcons = [
   // --- Languages ---
@@ -216,10 +217,26 @@ const projects = [
 ];
 
 export default function Home() {
+  const [currentProjectId, setCurrentProjectId] = useState(0);
+
   const iconStyle =
     "hover:scale-110 hover:bg-white hover:text-black transition-all duration-100";
   const buttonStyle =
-    "px-3 py-1 text-white rounded-md hover:bg-red-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-3xl border border-white/20  bg-gradient-to-br bg-red-500 from-white/20 via-white/5 to-white/10 cursor-pointer hover:-translate-y-0.5 hover:-translate-x-0.5 active:translate-y-0 active:translate-x-0 hover:shadow-[4px_4px_0px_#000000] active:shadow-none transition duration-100 mx-1 border-2 ";
+    "px-4 py-2 text-white rounded-md hover:bg-red-500 transition-all disabled:opacity-50 disabled:cursor-not-allowed rounded-3xl border border-white/20  bg-gradient-to-br from-white/20 via-white/5 to-white/10 cursor-pointer hover:-translate-y-0.5 hover:-translate-x-0.5 active:translate-y-0 active:translate-x-0 hover:shadow-[4px_4px_0px_#000000] active:shadow-none transition duration-100 mx-1 border-2 ";
+  const socialStyle =
+    "drop-shadow-md/25 hover:scale-120 hover:text-red-500 transition-all duration-300";
+
+  const wrapAround = (id: number) => {
+    let newId = id;
+    if (newId < 0) {
+      newId = projects.length - 1;
+    }
+    if (newId >= projects.length) {
+      newId = 0;
+    }
+
+    return newId;
+  };
 
   return (
     <>
@@ -229,87 +246,173 @@ export default function Home() {
       <SmoothScroll />
       <ParallaxProvider>
         {/* Title Section */}
-        <section id="home" className="relative flex h-[720px] w-full flex-col">
+        <section
+          id="home"
+          className="relative flex w-full flex-col overflow-hidden"
+        >
           <Parallax translateY={[-50, 50]} className="absolute inset-0 z-0">
             <div className="flex h-full w-full items-center justify-center bg-black opacity-50">
-              <h1 className="font bold text-[6rem]">BACKGROUND</h1>
+              <Image
+                alt="Craig Ondevilla"
+                src="/square bg.png"
+                width={1280}
+                height={1280}
+                className="w-full rounded-full object-cover"
+              />
             </div>
           </Parallax>
-          <div className="relative z-10 flex">
-            <h1 className="m-10 text-[10rem] font-bold">
-              <span className="inline md:hidden">CRAIG</span>
-              <span className="hidden md:inline">CRAIG ONDEVILLA</span>
+          <div className="relative z-10 mx-auto mt-20 mb-20 flex md:mb-40">
+            <h1 className="m-10 font-bold">
+              <span className="mx-auto inline lg:hidden">CRAIG</span>
+              <span className="hidden lg:inline">CRAIG ONDEVILLA</span>
             </h1>
           </div>
-          <div className="relative z-10 mx-auto flex text-[3rem] font-bold">
+          <div className="relative z-10 mx-auto mb-10 flex text-[3rem] font-bold">
             <Link href="#about" className={buttonStyle}>
               click to explore
             </Link>
           </div>
+          <div className="group flex justify-center gap-7 pb-5">
+            <a
+              href="https://github.com/craigsterr"
+              className={socialStyle + " space-y-2"}
+            >
+              <SiGithub size={30} className="mx-auto" />
+              <p className="font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                Github
+              </p>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/craig-ondevilla-8106b4191"
+              className={socialStyle + " space-y-2"}
+            >
+              <SiLinkedin size={30} className="mx-auto" />
+              <p className="font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                LinkedIn
+              </p>
+            </a>
+            <a href="./resume.pdf" className={socialStyle + " space-y-2"}>
+              {" "}
+              <FaFileAlt size={30} className="mx-auto" />
+              <p className="font-bold opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                Resume
+              </p>
+            </a>
+          </div>
+
           <div className="relative z-10 mx-auto mt-auto mb-10 flex">
-            <FontAwesomeIcon icon={faAnglesDown} size="5x" />
+            <FontAwesomeIcon icon={faAnglesDown} size="2x" />
           </div>
         </section>
         {/* About me section */}
-        <section id="about" className="h-[720px]">
-          <div className="relative z-10 flex h-full bg-red-500 p-10">
-            <div>
-              <h2 className="text-[6rem] font-bold">ABOUT ME</h2>
-              <p className="text-2xl md:w-1/2">
-                {" "}
+        <section id="about">
+          <div className="relative z-10 flex h-full flex-col bg-red-500 p-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="mb-10 lg:mb-0 lg:w-1/2 lg:p-10">
+              <h2 className="font-bold text-shadow-xs">ABOUT ME</h2>
+              <p className="text-2xl">
                 I'm a passionate programmer with a Bachelor of Science in
                 Computer Science from the University of Illinois
                 Urbana-Champaign (UIUC). I specialize in web development and
                 design, and I love creating clean, user-friendly digital
                 experiences. Me and my friend are currently working on Camelia,
                 a web development startup providing stylish and responsive
-                websites for clients with small businesses.{" "}
+                websites for clients with small businesses.
               </p>
             </div>
-            <Image
-              alt="Craig Ondevilla"
-              src={"/craig.jpg"}
-              width={1080}
-              height={1080}
-            />
+            <div className="flex justify-center lg:w-1/2">
+              <Image
+                alt="Craig Ondevilla"
+                src="/craig.jpg"
+                width={700}
+                height={700}
+                className="h-auto w-full max-w-xs rounded-full sm:max-w-sm md:max-w-md lg:max-w-lg"
+              />
+            </div>
           </div>
-        </section>
+        </section>{" "}
         {/* Projects Section */}
-        <section id="projects" className="relative h-[720px]">
+        <section id="projects" className="relative overflow-hidden">
           <Parallax translateY={[-50, 50]} className="absolute inset-0">
             <div className="flex h-full w-full items-center justify-center">
               <Image
-                alt="Craig Ondevilla"
-                src={projects[0].image}
+                alt={projects[currentProjectId].title}
+                src={projects[currentProjectId].image}
                 width={1080}
                 height={1080}
-                className="rounded-2xl object-cover drop-shadow-2xl"
+                className="rounded-2xl object-cover opacity-50 drop-shadow-2xl"
               />
             </div>
           </Parallax>
-          <div className="relative m-10 flex h-full w-full flex-col">
-            <div className="z-10">
-              <h1 className="text-[6rem] font-bold">PROJECTS</h1>
-              <h2 className="text-[4rem] font-bold">{projects[0].title}</h2>
-              <p className="text-2xl">{projects[0].description}</p>
+          <div className="relative m-10 flex flex-col">
+            <div className="z-10 mb-50 rounded-2xl text-shadow-xs">
+              <h2 className="font-bold">PROJECTS</h2>
+              <h3 className="text-[2rem] font-bold md:text-[4rem]">
+                {projects[currentProjectId].title}
+              </h3>
+              <p className="mb-10 text-2xl">
+                {projects[currentProjectId].description}
+              </p>
+              <a
+                href={projects[currentProjectId].link}
+                className={buttonStyle + " text-[3rem] font-bold"}
+              >
+                check it out!
+              </a>
             </div>
-            {/* <Image
-              alt={projects[0].title}
-              src={projects[0].image}
-              width={1280}
-              height={720}
-              className="h-full w-full rounded-2xl drop-shadow-2xl"
-            /> */}
-            <div className="mx-auto mt-auto flex gap-10">
-              <div className="mb-10 h-32 w-64 rounded-2xl bg-white/50" />
-              <div className="mb-10 h-32 w-64 rounded-2xl bg-white/50" />
-              <div className="mb-10 h-32 w-64 rounded-2xl bg-white/50" />
+
+            <div className="mx-auto mt-auto mb-10 flex items-center gap-10">
+              <FontAwesomeIcon
+                icon={faAnglesDown}
+                size="3x"
+                onClick={() => setCurrentProjectId((id) => wrapAround(id - 1))}
+                className="relative z-10 my-auto flex rotate-90 duration-300 hover:scale-110 hover:cursor-pointer"
+              />
+              <div className="hidden h-32 w-64 rounded-2xl lg:block">
+                <Image
+                  alt={projects[wrapAround(currentProjectId - 1)].title}
+                  src={projects[wrapAround(currentProjectId - 1)].image}
+                  width={1280}
+                  height={720}
+                  onClick={() =>
+                    setCurrentProjectId((id) => wrapAround(id - 1))
+                  }
+                  className="h-full w-full rounded-2xl border border-white/4 object-cover drop-shadow-2xl duration-300 hover:scale-105 hover:cursor-pointer"
+                />
+              </div>
+              <div className="hidden h-32 w-64 rounded-2xl lg:block">
+                <Image
+                  alt={projects[currentProjectId].title}
+                  src={projects[currentProjectId].image}
+                  width={1280}
+                  height={720}
+                  className="h-full w-full scale-90 rounded-2xl border border-white/4 object-cover drop-shadow-2xl duration-300 lg:scale-115"
+                />
+              </div>
+              <div className="hidden h-32 w-64 rounded-2xl lg:block">
+                <Image
+                  alt={projects[wrapAround(currentProjectId + 1)].title}
+                  src={projects[wrapAround(currentProjectId + 1)].image}
+                  width={1280}
+                  height={720}
+                  onClick={() =>
+                    setCurrentProjectId((id) => wrapAround(id + 1))
+                  }
+                  className="h-full w-full rounded-2xl border border-white/4 object-cover drop-shadow-2xl duration-300 hover:scale-105 hover:cursor-pointer"
+                />
+              </div>
+
+              <FontAwesomeIcon
+                icon={faAnglesDown}
+                size="3x"
+                onClick={() => setCurrentProjectId((id) => wrapAround(id - 1))}
+                className="relative z-10 my-auto flex -rotate-90 duration-300 hover:scale-110 hover:cursor-pointer"
+              />
             </div>
           </div>
         </section>
         <section id="skills">
           <div className="relative z-10 h-full bg-red-500 p-10">
-            <h2 className="text-[6rem] font-bold">SKILLS</h2>
+            <h2 className="font-bold text-shadow-xs">SKILLS</h2>
             <div className="py-20">
               <div className="mx-auto flex w-[90%] flex-wrap justify-center gap-10 lg:w-[70%]">
                 {labeledIcons.map(({ icon: Icon, name, description }, i) => (
@@ -321,12 +424,31 @@ export default function Home() {
                   >
                     <div className="flex flex-col gap-5 p-4">
                       <Icon size={50} className="mx-auto" />
-                      <h2 className="hidden font-black lg:block">{name}</h2>
+                      <h3 className="hidden font-black lg:block">{name}</h3>
                       <p className="hidden lg:block">{description}</p>
                     </div>
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+        <section id="contact">
+          <div className="relative z-10 flex h-full flex-col items-center bg-black p-30">
+            <h2 className="font-bold text-shadow-xs">CONTACT</h2>
+            <div className="space-y-10 rounded-2xl border p-10">
+              <h3 className="text-[3rem] font-bold">Let's get in touch!</h3>
+              <p className="max-w-lg text-lg">
+                I’m always excited to collaborate on creative projects, chat
+                about tech, or discuss opportunities. Drop me a message — I’ll
+                get back to you as soon as I can.
+              </p>
+              <a
+                href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=craig.brdt505@gmail.com"
+                className="text-xl text-blue-500"
+              >
+                craig.brdt505@gmail.com
+              </a>
             </div>
           </div>
         </section>
