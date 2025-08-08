@@ -282,7 +282,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="overflow-x-hidden">
       <div className="flex justify-center">
         <NavBar />
       </div>
@@ -551,6 +551,6 @@ export default function Home() {
           </div>
         </section>
       </ParallaxProvider>
-    </>
+    </div>
   );
 }
