@@ -200,3 +200,54 @@ html {
   animation-timeline: view();
   animation-range: entry 0% cover 40%;
 }
+
+.hide {
+  opacity: 0;
+  transform: translateX(10%);
+  transition: all 1s;
+}
+.show {
+  opacity: 1;
+  transform: translateX(0%);
+  transition: all 1s;
+}
+
+@media (prefers-reduced-motion) {
+  .hidden {
+    transition: none;
+  }
+}
+
+@keyframes scroll {
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+.scroller {
+  padding-block: 8px;
+  border-block: 1px solid;
+  overflow: hidden;
+  user-select: none;
+  --gap: 150px;
+  --item-gap: 60px; /* New variable for item spacing */
+  display: flex;
+  gap: var(--gap);
+}
+
+.scroller ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 0;
+  min-width: 100%;
+  gap: var(--item-gap); /* Use larger gap for items */
+  align-items: center;
+  animation: scroll 20s linear infinite;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem;
+}
+
+.scroller:hover ul {
+  animation-play-state: paused;
+}

@@ -27,11 +27,13 @@ import {
   SiVercel,
   SiSass,
   SiJavascript,
+  SiRailway,
+  SiPrisma,
 } from "react-icons/si"; // or "react-icons/fa"
 import { FaFileAlt } from "react-icons/fa";
 import NavBar from "@/components/custom/NavBar";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const labeledIcons = [
   // --- Languages ---
@@ -76,6 +78,18 @@ const labeledIcons = [
     icon: SiNodedotjs,
     description:
       "JavaScript runtime built on Chrome's V8 engine, ideal for building backend services.",
+  },
+  {
+    name: "Railway",
+    icon: SiRailway,
+    description:
+      "A cloud platform that helps you deploy, manage, and scale apps and databases with minimal configuration.",
+  },
+  {
+    name: "Prisma",
+    icon: SiPrisma,
+    description:
+      "A modern database toolkit and ORM for TypeScript and JavaScript, simplifying database access and migrations.",
   },
 
   // --- Frameworks & Libraries ---
@@ -252,6 +266,21 @@ export default function Home() {
     return newId;
   };
 
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        } else {
+          entry.target.classList.remove("show");
+        }
+      });
+    });
+
+    const appearElements = document.querySelectorAll(".hide");
+    appearElements.forEach((element) => observer.observe(element));
+  }, []);
+
   return (
     <>
       <div className="flex justify-center">
@@ -276,17 +305,17 @@ export default function Home() {
             </div>
           </Parallax>
           <div className="relative z-10 mx-auto mt-20 mb-20 flex md:mb-40">
-            <h1 className="font-bold md:m-10">
+            <h1 className="hide font-bold md:m-10">
               <span className="mx-auto inline lg:hidden">CRAIG</span>
               <span className="hidden lg:inline">CRAIG ONDEVILLA</span>
             </h1>
           </div>
-          <div className="relative z-10 mx-auto mb-10 flex text-[2rem] font-bold md:text-[3rem]">
+          <div className="hide relative z-10 mx-auto mb-10 flex text-[2rem] font-bold md:text-[3rem]">
             <Link href="#about" className={buttonStyle}>
               click to explore
             </Link>
           </div>
-          <div className="group flex justify-center gap-7 pb-5">
+          <div className="group hide flex justify-center gap-7 pb-5">
             <a
               href="https://github.com/craigsterr"
               className={socialStyle + " space-y-2"}
@@ -313,17 +342,51 @@ export default function Home() {
               </p>
             </a>
           </div>
-
           <div className="relative z-10 mx-auto mt-auto mb-10 flex">
             <FontAwesomeIcon icon={faAnglesDown} size="2x" />
           </div>
+          <div className="scroller">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <ul key={i}>
+                <li>
+                  <span>Full Stack Developer</span>
+                </li>
+                <li>
+                  <span>UI/UX Designer</span>
+                </li>
+                <li>
+                  <span>Problem Solver</span>
+                </li>
+                <li>
+                  <span>Frontend Developer</span>
+                </li>
+                <li>
+                  <span>Artist</span>
+                </li>
+                <li>
+                  <span>Team Player</span>
+                </li>
+                <li>
+                  <span>Leader</span>
+                </li>
+                <li>
+                  <span>Programmer</span>
+                </li>
+                <li>
+                  <span>Freelancer</span>
+                </li>
+              </ul>
+            ))}{" "}
+          </div>{" "}
         </section>
         {/* About me section */}
         <section id="about">
           <div className="relative z-10 flex h-full flex-col bg-red-500 p-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="mb-10 lg:mb-0 lg:w-1/2 lg:p-10">
-              <h2 className="font-bold text-shadow-xs">ABOUT ME</h2>
-              <div className="space-y-5">
+              <h2 className="hide inline-block font-bold text-shadow-xs">
+                ABOUT ME
+              </h2>
+              <div className="hide space-y-5">
                 <p className="text-2xl">
                   Welcome to the page! I'm Craig, a Computer Science graduate
                   from the University of Illinois Urbana-Champaign! I'm a{" "}
@@ -342,7 +405,7 @@ export default function Home() {
                 </p>
               </div>
             </div>
-            <div className="flex justify-center lg:w-1/2">
+            <div className="hide flex justify-center lg:w-1/2">
               <Image
                 alt="Craig Ondevilla"
                 src="/craig.jpg"
@@ -368,22 +431,22 @@ export default function Home() {
           </Parallax>
           <div className="relative m-5 flex flex-col md:m-10">
             <div className="z-10 mb-50 rounded-2xl text-shadow-xs">
-              <h2 className="font-bold">PROJECTS</h2>
-              <h3 className="text-[2rem] font-bold md:text-[4rem]">
+              <h2 className="hide font-bold">PROJECTS</h2>
+              <h3 className="hide text-[2rem] font-bold md:text-[4rem]">
                 {projects[currentProjectId].title}
               </h3>
-              <p className="mb-10 text-2xl">
+              <p className="hide mb-10 text-2xl">
                 {projects[currentProjectId].description}
               </p>
               <a
                 href={projects[currentProjectId].link}
                 className={
-                  buttonStyle + " text-[2rem] font-bold md:text-[3rem]"
+                  buttonStyle + " hide text-[2rem] font-bold md:text-[3rem]"
                 }
               >
                 DEMO
               </a>
-              <div className="mt-10 flex flex-wrap gap-5">
+              <div className="hide mt-10 flex flex-wrap gap-5">
                 {projects[currentProjectId].technologies &&
                   projects[currentProjectId].technologies?.map(
                     (TechIcon, TechIndex) => (
@@ -393,7 +456,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="mx-auto mt-auto mb-10 flex items-center gap-10">
+            <div className="hide mx-auto mt-auto mb-10 flex items-center gap-10">
               <FontAwesomeIcon
                 icon={faAnglesDown}
                 size="3x"
@@ -445,8 +508,8 @@ export default function Home() {
         </section>
         <section id="skills">
           <div className="relative z-10 h-full bg-red-500 p-10">
-            <h2 className="font-bold text-shadow-xs">SKILLS</h2>
-            <div className="py-20">
+            <h2 className="hide font-bold text-shadow-xs">SKILLS</h2>
+            <div className="hide py-20">
               <div className="mx-auto flex w-[90%] flex-wrap justify-center gap-10 lg:w-[70%]">
                 {labeledIcons.map(({ icon: Icon, name, description }, i) => (
                   <div
@@ -468,17 +531,19 @@ export default function Home() {
         </section>
         <section id="contact">
           <div className="relative z-10 flex h-full flex-col items-center bg-black p-30">
-            <h2 className="mb-20 font-bold text-shadow-xs">CONTACT</h2>
+            <h2 className="hide mb-20 font-bold text-shadow-xs">CONTACT</h2>
             <div className="space-y-10 rounded-2xl border p-10">
-              <h3 className="text-[3rem] font-bold">Let's get in touch!</h3>
-              <p className="max-w-lg text-lg">
+              <h3 className="hide text-[3rem] font-bold">
+                Let's get in touch!
+              </h3>
+              <p className="hide max-w-lg text-lg">
                 I’m always excited to collaborate on creative projects, chat
                 about tech, or discuss opportunities. Drop me a message and I’ll
                 get back to you as soon as I can.
               </p>
               <a
                 href="https://mail.google.com/mail/u/0/?fs=1&tf=cm&source=mailto&to=craig.brdt505@gmail.com"
-                className="text-xl text-blue-500"
+                className="hide text-xl text-blue-500"
               >
                 craig.brdt505@gmail.com
               </a>
