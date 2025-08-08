@@ -24,6 +24,9 @@ import {
   SiNodedotjs,
   SiShadcnui,
   SiLinkedin,
+  SiVercel,
+  SiSass,
+  SiJavascript,
 } from "react-icons/si"; // or "react-icons/fa"
 import { FaFileAlt } from "react-icons/fa";
 import NavBar from "@/components/custom/NavBar";
@@ -149,9 +152,11 @@ const labeledIcons = [
 const projects = [
   {
     title: "CoverMe",
-    description: "An AI Cover Letter generator using Next.js and ChatGPT!",
+    description:
+      "An AI-powered Cover Letter Generator built with ChatGPT. Used by 200+ users to create over 400 cover letters and counting. I still use it daily!",
     image: "./coverme.png",
     link: "https://coverme.craigo.live",
+    technologies: [SiTypescript, SiNextdotjs, SiHtml5, SiCss3, SiTailwindcss],
   },
   {
     title: "Spyfall",
@@ -159,6 +164,15 @@ const projects = [
       "A web clone of the social deduction game Spyfall using Next.js and Supabase!",
     image: "./spyfall.png",
     link: "https://spyfall.craigo.live",
+    technologies: [
+      SiTypescript,
+      SiNextdotjs,
+      SiHtml5,
+      SiCss3,
+      SiTailwindcss,
+      SiVercel,
+      SiSupabase,
+    ],
   },
   {
     title: "Productivity Slime",
@@ -166,6 +180,7 @@ const projects = [
       "A Firefox extension live on the add-ons store to track time spent on unproductive tabs in the style of a video game slime.",
     image: "./slime_sc.png",
     link: "https://addons.mozilla.org/en-US/firefox/addon/productivity-slime/",
+    technologies: [SiTailwindcss, SiHtml5, SiJavascript],
   },
   {
     title: "Camelia",
@@ -173,6 +188,14 @@ const projects = [
       "A two-person web development startup focused creating stylish and responsive websites.",
     image: "./camellia.png",
     link: "https://camelia.work",
+    technologies: [
+      SiTypescript,
+      SiNextdotjs,
+      SiReact,
+      SiTailwindcss,
+      SiHtml5,
+      SiCss3,
+    ],
   },
   {
     title: "News Template Presets",
@@ -180,6 +203,7 @@ const projects = [
       "A preset Firefox extension to automate article items when I worked as a news reporter.",
     image: "./news.png",
     link: "https://addons.mozilla.org/en-US/firefox/addon/news-template-presets/",
+    technologies: [SiJavascript, SiHtml5, SiCss3], // Note: You'll need to import SiJavascript
   },
   {
     title: "Webbie Pet",
@@ -187,18 +211,14 @@ const projects = [
       "A tamagotchi style game created with JavaScript, HTML5 Canvas, SASS, Next.js, and Node.js.",
     image: "./webbie-sc.png",
     link: "https://craigsterr.github.io/webbie-pet",
+    technologies: [SiJavascript, SiNextdotjs, SiNodedotjs, SiHtml5, SiSass], // Note: You'll need to import SiSass
   },
   {
     title: "Kitty Clicker",
     description: "A clicker game made entirely in React, HTML, and Javascript.",
     image: "./kitty.png",
     link: "https://craigsterr.github.io/kitty-clicker",
-  },
-  {
-    title: "TURBOHYPER",
-    description: "A bullet hell game made in Unity/C#. (COMING SOON)",
-    image: "./logo.png",
-    link: "",
+    technologies: [SiReact, SiJavascript, SiHtml5, SiCss3],
   },
   {
     title: "Trial N' Error",
@@ -206,13 +226,7 @@ const projects = [
       "A problem solving app focused on finding the variables to success made in Next.js. (COMING SOON)",
     image: "./logo.png",
     link: "https://github.com/craigsterr/trial-n-error",
-  },
-  {
-    title: "Reddit Grabber",
-    description:
-      "Search tool that grabs the top Reddit comments to a search. (COMING SOON)",
-    image: "./logo.png",
-    link: "",
+    technologies: [SiNextdotjs, SiTypescript, SiReact, SiTailwindcss],
   },
 ];
 
@@ -262,12 +276,12 @@ export default function Home() {
             </div>
           </Parallax>
           <div className="relative z-10 mx-auto mt-20 mb-20 flex md:mb-40">
-            <h1 className="m-10 font-bold">
+            <h1 className="font-bold md:m-10">
               <span className="mx-auto inline lg:hidden">CRAIG</span>
               <span className="hidden lg:inline">CRAIG ONDEVILLA</span>
             </h1>
           </div>
-          <div className="relative z-10 mx-auto mb-10 flex text-[3rem] font-bold">
+          <div className="relative z-10 mx-auto mb-10 flex text-[2rem] font-bold md:text-[3rem]">
             <Link href="#about" className={buttonStyle}>
               click to explore
             </Link>
@@ -309,15 +323,24 @@ export default function Home() {
           <div className="relative z-10 flex h-full flex-col bg-red-500 p-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="mb-10 lg:mb-0 lg:w-1/2 lg:p-10">
               <h2 className="font-bold text-shadow-xs">ABOUT ME</h2>
-              <p className="text-2xl">
-                I'm a passionate programmer with a Bachelor of Science in
-                Computer Science from the University of Illinois
-                Urbana-Champaign (UIUC). I specialize in web development and
-                design, and I love creating clean, user-friendly digital
-                experiences. Me and my friend are currently working on Camelia,
-                a web development startup providing stylish and responsive
-                websites for clients with small businesses.
-              </p>
+              <div className="space-y-5">
+                <p className="text-2xl">
+                  Welcome to the page! I'm Craig, a Computer Science graduate
+                  from the University of Illinois Urbana-Champaign! I'm a{" "}
+                  <b>full stack developer</b> with a passion for intuitive
+                  design and collaboration. I have hands-on expertise with
+                  TypeScript, Next.js, Tailwind CSS, and PostgreSQL. I've
+                  contributed to several startups, media organizations, and led
+                  several projects.
+                </p>
+                <p className="text-2xl">
+                  My most recent contributions are as a full stack developer for
+                  <b> Elaview</b>, a B2B advertiser marketplace website and a
+                  full stack developer and co-founder of <b>Camelia</b>, a web
+                  development startup. I'm also an artist at heart, with a
+                  passion for stylish and vibrant UI.
+                </p>
+              </div>
             </div>
             <div className="flex justify-center lg:w-1/2">
               <Image
@@ -343,7 +366,7 @@ export default function Home() {
               />
             </div>
           </Parallax>
-          <div className="relative m-10 flex flex-col">
+          <div className="relative m-5 flex flex-col md:m-10">
             <div className="z-10 mb-50 rounded-2xl text-shadow-xs">
               <h2 className="font-bold">PROJECTS</h2>
               <h3 className="text-[2rem] font-bold md:text-[4rem]">
@@ -354,10 +377,20 @@ export default function Home() {
               </p>
               <a
                 href={projects[currentProjectId].link}
-                className={buttonStyle + " text-[3rem] font-bold"}
+                className={
+                  buttonStyle + " text-[2rem] font-bold md:text-[3rem]"
+                }
               >
-                check it out!
+                DEMO
               </a>
+              <div className="mt-10 flex flex-wrap gap-5">
+                {projects[currentProjectId].technologies &&
+                  projects[currentProjectId].technologies?.map(
+                    (TechIcon, TechIndex) => (
+                      <TechIcon key={TechIndex} size={50} />
+                    ),
+                  )}
+              </div>
             </div>
 
             <div className="mx-auto mt-auto mb-10 flex items-center gap-10">
@@ -435,12 +468,12 @@ export default function Home() {
         </section>
         <section id="contact">
           <div className="relative z-10 flex h-full flex-col items-center bg-black p-30">
-            <h2 className="font-bold text-shadow-xs">CONTACT</h2>
+            <h2 className="mb-20 font-bold text-shadow-xs">CONTACT</h2>
             <div className="space-y-10 rounded-2xl border p-10">
               <h3 className="text-[3rem] font-bold">Let's get in touch!</h3>
               <p className="max-w-lg text-lg">
                 I’m always excited to collaborate on creative projects, chat
-                about tech, or discuss opportunities. Drop me a message — I’ll
+                about tech, or discuss opportunities. Drop me a message and I’ll
                 get back to you as soon as I can.
               </p>
               <a
