@@ -173,6 +173,14 @@ const projects = [
     technologies: [SiTypescript, SiNextdotjs, SiHtml5, SiCss3, SiTailwindcss],
   },
   {
+    title: "Pisayian Data Cleaner & Normalizer",
+    description:
+      "Won first place at the Kapwa Codefest 2025 Hackathon! Web tool for the PSHS international alumni foundation that allows them to convert their SPECTRA .csv files to properly formatted .csv files for their alumni database. ",
+    image: "./kapwa.png",
+    link: "https://csv-umber.vercel.app/",
+    technologies: [SiTypescript, SiNextdotjs, SiHtml5, SiCss3, SiTailwindcss],
+  },
+  {
     title: "Spyfall",
     description:
       "A web clone of the social deduction game Spyfall using Next.js and Supabase!",
@@ -235,11 +243,11 @@ const projects = [
     technologies: [SiReact, SiJavascript, SiHtml5, SiCss3],
   },
   {
-    title: "Trial N' Error",
+    title: "The Backroom",
     description:
-      "A problem solving app focused on finding the variables to success made in Next.js. (COMING SOON)",
-    image: "./logo.png",
-    link: "https://github.com/craigsterr/trial-n-error",
+      "An inventory app commissioned by Cacao De Davao to manage and track inventory and sales on a semi local web app.",
+    image: "./inventory.png",
+    link: "https://inventory-3rjex210k-craigsterrs-projects.vercel.app/",
     technologies: [SiNextdotjs, SiTypescript, SiReact, SiTailwindcss],
   },
 ];
