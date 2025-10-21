@@ -14,21 +14,18 @@ import {
   SiGithub,
   SiTailwindcss,
   SiDocker,
-  SiAdobephotoshop,
-  SiAdobeillustrator,
-  SiBlender,
   SiCplusplus,
   SiUnity,
-  SiUnrealengine,
   SiSupabase,
   SiNodedotjs,
-  SiShadcnui,
   SiLinkedin,
   SiVercel,
   SiSass,
   SiJavascript,
-  SiRailway,
   SiPrisma,
+  SiNestjs,
+  SiAmazonwebservices,
+  SiSqlalchemy,
 } from "react-icons/si"; // or "react-icons/fa"
 import { FaFileAlt } from "react-icons/fa";
 import NavBar from "@/components/custom/NavBar";
@@ -80,12 +77,6 @@ const labeledIcons = [
       "JavaScript runtime built on Chrome's V8 engine, ideal for building backend services.",
   },
   {
-    name: "Railway",
-    icon: SiRailway,
-    description:
-      "A cloud platform that helps you deploy, manage, and scale apps and databases with minimal configuration.",
-  },
-  {
     name: "Prisma",
     icon: SiPrisma,
     description:
@@ -111,13 +102,6 @@ const labeledIcons = [
     description:
       "Utility-first CSS framework for custom, responsive UI design.",
   },
-  {
-    name: "shadcn/ui",
-    icon: SiShadcnui,
-    description:
-      "Beautifully designed, customizable React components built with Tailwind CSS and Radix UI.",
-  },
-
   // --- DevOps & Developer Tools ---
   {
     name: "GitHub",
@@ -131,36 +115,28 @@ const labeledIcons = [
     description:
       "Platform for containerizing applications and managing environments.",
   },
-
-  // --- Design & Media ---
-  {
-    name: "Adobe Photoshop",
-    icon: SiAdobephotoshop,
-    description:
-      "Industry-standard tool for raster graphics and image editing.",
-  },
-  {
-    name: "Adobe Illustrator",
-    icon: SiAdobeillustrator,
-    description:
-      "Vector graphics software for logos, icons, and illustrations.",
-  },
-  {
-    name: "Blender",
-    icon: SiBlender,
-    description:
-      "Open-source 3D creation suite for modeling, animation, and rendering.",
-  },
   {
     name: "Unity",
     icon: SiUnity,
     description: "Cross-platform game engine for 2D/3D games and simulations.",
   },
   {
-    name: "Unreal Engine",
-    icon: SiUnrealengine,
+    name: "NestJS",
+    icon: SiNestjs,
     description:
-      "High-fidelity game engine used for AAA games and virtual production.",
+      "Progressive Node.js framework for building efficient, scalable server-side applications.",
+  },
+  {
+    name: "Amazon Web Services",
+    icon: SiAmazonwebservices,
+    description:
+      "Comprehensive cloud platform offering computing, storage, and infrastructure services.",
+  },
+  {
+    name: "SQLAlchemy",
+    icon: SiSqlalchemy,
+    description:
+      "Powerful Python ORM and database toolkit for flexible and efficient data management.",
   },
 ];
 const projects = [
@@ -249,6 +225,14 @@ const projects = [
     image: "./inventory.png",
     link: "https://inventory-3rjex210k-craigsterrs-projects.vercel.app/",
     technologies: [SiNextdotjs, SiTypescript, SiReact, SiTailwindcss],
+  },
+  {
+    title: "Reverber",
+    description:
+      "A file upload app that takes an audio file an applies different types of reverb.",
+    image: "./reverber.png",
+    link: "https://github.com/CraigO5/reverber",
+    technologies: [SiNextdotjs, SiTypescript, SiReact, SiTailwindcss, SiPython],
   },
 ];
 
@@ -400,16 +384,35 @@ export default function Home() {
                   from the University of Illinois Urbana-Champaign! I'm a{" "}
                   <b>full stack developer</b> with a passion for intuitive
                   design and collaboration. I have hands-on expertise with
-                  TypeScript, Next.js, Tailwind CSS, and PostgreSQL. I've
+                  TypeScript, Next.js, Tailwind CSS, PostgreSQL, and more. I've
                   contributed to several startups, media organizations, and led
                   several projects.
                 </p>
                 <p className="text-2xl">
-                  My most recent contributions are as a full stack developer for
-                  <b> Elaview</b>, a B2B advertiser marketplace website and a
-                  full stack developer and co-founder of <b>Camelia</b>, a web
-                  development startup. I'm also an artist at heart, with a
-                  passion for stylish and vibrant UI.
+                  My most recent contributions are as software developers for{" "}
+                  <a
+                    href="https://ourfreedom.ai/"
+                    className="font-bold text-yellow-200"
+                  >
+                    OurFreedom.ai
+                  </a>
+                  ,
+                  <a
+                    href="https://www.elaview.com/"
+                    className="font-bold text-yellow-200"
+                  >
+                    {" "}
+                    Elaview
+                  </a>
+                  , and
+                  <a
+                    href="https://www.camelia.work/"
+                    className="font-bold text-yellow-200"
+                  >
+                    {" "}
+                    Camelia
+                  </a>
+                  .
                 </p>
               </div>
             </div>
