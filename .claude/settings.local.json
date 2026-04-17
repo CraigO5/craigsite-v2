@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc:*)",
+      "Bash(rm -rf app/old app/new app/blog components/custom/ContactCard.tsx)",
+      "Bash(rm -f \"public/file copy.svg\" \"public/next copy.svg\" \"public/vercel copy.svg\" \"public/globe copy.svg\" \"public/window copy.svg\" public/mountains.png public/typescript.png public/tne.png public/arrow.png public/arrow_white.png public/2014525-200.png public/craig-logo.png public/nextjs.svg public/file.svg public/globe.svg public/next.svg public/vercel.svg public/window.svg)",
+      "Bash(npm uninstall:*)",
+      "Bash(npx next:*)",
+      "Bash(xargs grep:*)"
+    ]
+  }
+}
