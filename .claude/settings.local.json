@@ -6,7 +6,9 @@
       "Bash(rm -f \"public/file copy.svg\" \"public/next copy.svg\" \"public/vercel copy.svg\" \"public/globe copy.svg\" \"public/window copy.svg\" public/mountains.png public/typescript.png public/tne.png public/arrow.png public/arrow_white.png public/2014525-200.png public/craig-logo.png public/nextjs.svg public/file.svg public/globe.svg public/next.svg public/vercel.svg public/window.svg)",
       "Bash(npm uninstall:*)",
       "Bash(npx next:*)",
-      "Bash(xargs grep:*)"
+      "Bash(xargs grep:*)",
+      "Bash(node -e \"console.log\\(require\\('./package.json'\\).dependencies['server-only'] || 'not-installed'\\)\")",
+      "Bash(wc -l \"F:/euno/euno-backend/src\"/**/*.ts)"
     ]
   }
 }

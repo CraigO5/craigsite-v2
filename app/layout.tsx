@@ -3,6 +3,9 @@ import { Space_Grotesk, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/custom/ThemeProvider";
 import NavBar from "@/components/custom/NavBar";
 import BottomNav from "@/components/custom/BottomNav";
+import CommandPalette from "@/components/custom/CommandPalette";
+import KeyboardShortcuts from "@/components/custom/KeyboardShortcuts";
+import BuildFooter from "@/components/custom/BuildFooter";
 import "./globals.css";
 
 // Runs before hydration — prevents a flash of unthemed content
@@ -86,7 +89,10 @@ export default function RootLayout({
             <NavBar />
           </div>
           {children}
+          <BuildFooter />
           <BottomNav />
+          <CommandPalette />
+          <KeyboardShortcuts />
         </ThemeProvider>
       </body>
     </html>

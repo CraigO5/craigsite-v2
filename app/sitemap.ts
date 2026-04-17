@@ -12,8 +12,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/work",
     "/profile",
     "/achievements",
-    "/ask",
     "/contact",
+    "/settings",
+    "/uses",
+    "/changelog",
   ].map((path) => ({
     url: `${base}${path}`,
     lastModified: now,

@@ -15,10 +15,10 @@ export const experiences: Experience[] = [
     dates: "October 2025 – Present",
     location: "Remote",
     bullets: [
-      "Implemented AES-GCM encryption, biometric authentication, and semantic vector search across 25+ serverless functions.",
-      "Rebuilt and deployed Euno mobile app from Swift to React Native (Expo) and TypeScript with a Supabase backend, enabling 50+ concurrent users and turning user conversations into a structured, queryable psychological knowledge base.",
-      "Built a containerized NestJS backend service with BullMQ job queues for continuous per-user AI agent processing, replacing client-side schedulers with a reliable server-side heartbeat loop.",
-      "Architected and implemented a social system including friend management, feed, comments, and profile handling, fully integrated across frontend, backend, and AI pipelines, handling 1000+ tested interactions.",
+      "Migrated the iOS app from Swift to React Native (Expo 54) + TypeScript — cross-platform, offline-first, biometric-gated, HealthKit-synced.",
+      "Architected the NestJS 11 backend from scratch and the encryption, retrieval, cron, and social layers on top of it.",
+      "Shipped field-level AES-GCM with biometric-gated keys, and a heartbeat loop on Upstash QStash that coordinates Anthropic + OpenAI generation per user.",
+      "See the Euno case study for architecture, decisions, and what I'd do differently.",
     ],
   },
   {

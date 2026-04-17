@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Briefcase, User, MessageCircle, Trophy } from "lucide-react";
+import { Home, Briefcase, User, Trophy, Settings } from "lucide-react";
 
 type Item = {
   label: string;
@@ -38,10 +38,10 @@ const items: Item[] = [
     match: (p) => p === "/achievements",
   },
   {
-    label: "Ask",
-    href: "/ask",
-    icon: MessageCircle,
-    match: (p) => p === "/ask",
+    label: "Settings",
+    href: "/settings",
+    icon: Settings,
+    match: (p) => p === "/settings",
   },
 ];
 

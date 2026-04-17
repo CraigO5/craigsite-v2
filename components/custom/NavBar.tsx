@@ -2,16 +2,32 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import {
+  Menu,
+  X,
+  Home,
+  Briefcase,
+  User,
+  Trophy,
+  Settings,
+  type LucideIcon,
+} from "lucide-react";
 import Image from "next/image";
 import ThemeSwitcher from "./ThemeSwitcher";
 
-const links = [
-  { name: "work", href: "/work" },
-  { name: "profile", href: "/profile" },
-  { name: "badges", href: "/achievements" },
-  { name: "ask", href: "/ask" },
-  { name: "contact", href: "/contact" },
+type NavLink = {
+  name: string;
+  href: string;
+  icon: LucideIcon;
+};
+
+// Mirrors BottomNav — same sections, same order.
+const links: NavLink[] = [
+  { name: "home", href: "/", icon: Home },
+  { name: "work", href: "/work", icon: Briefcase },
+  { name: "profile", href: "/profile", icon: User },
+  { name: "badges", href: "/achievements", icon: Trophy },
+  { name: "settings", href: "/settings", icon: Settings },
 ];
 
 const linkStyle =
@@ -24,14 +40,21 @@ export default function NavBar() {
     <>
       <nav className="fixed z-20 w-full border-white/15 bg-white/8 px-4 py-2.5 shadow-lg backdrop-blur-md sm:mt-3 sm:max-w-[75%] sm:rounded-3xl sm:border">
         <div className="mx-auto flex max-w-7xl items-center justify-between">
-          <Link href="/">
+          <Link
+            href="/"
+            aria-label="Home"
+            className="flex items-center gap-2"
+          >
             <Image
-              src="/logo.png"
-              alt="logo"
+              src="/craig.jpg"
+              alt="Craig"
               width={40}
               height={40}
-              className="transition-transform duration-200 hover:scale-110"
+              className="h-9 w-9 rounded-full object-cover ring-1 ring-white/15 transition-transform duration-200 hover:scale-110"
             />
+            <span className="hidden text-sm font-semibold text-white/80 sm:inline">
+              Craig
+            </span>
           </Link>
 
           <div className="flex items-center gap-2 sm:hidden">
@@ -46,11 +69,19 @@ export default function NavBar() {
           </div>
 
           <div className="hidden items-center gap-1 sm:flex">
-            {links.map((link) => (
-              <Link key={link.href} href={link.href} className={linkStyle}>
-                {link.name}
-              </Link>
-            ))}
+            {links.map((link) => {
+              const Icon = link.icon;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`${linkStyle} flex items-center gap-1.5`}
+                >
+                  <Icon size={14} />
+                  {link.name}
+                </Link>
+              );
+            })}
             <div className="ml-2 border-l border-white/10 pl-2">
               <ThemeSwitcher />
             </div>
@@ -81,16 +112,20 @@ export default function NavBar() {
             <X size={22} />
           </button>
           <div className="flex flex-col gap-1">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-xl px-4 py-3 text-base font-medium text-white/60 hover:bg-white/8 hover:text-white transition-all duration-200"
-                onClick={() => setIsOpen(false)}
-              >
-                {link.name}
-              </Link>
-            ))}
+            {links.map((link) => {
+              const Icon = link.icon;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="flex items-center gap-3 rounded-xl px-4 py-3 text-base font-medium text-white/60 hover:bg-white/8 hover:text-white transition-all duration-200"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Icon size={16} />
+                  {link.name}
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

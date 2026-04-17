@@ -31,11 +31,10 @@ export const achievements: Achievement[] = [
   },
   {
     id: "aes-wizard",
-    icon: "🔐",
     title: "AES Wizard",
-    description:
-      "Implemented AES-GCM encryption + biometric authentication across 25+ serverless functions.",
-    metric: "25+ encrypted endpoints",
+    icon: "🔐",
+    description: "Shipped biometric-gated field-level encryption across Euno.",
+    metric: "AES-GCM · Face ID",
     unlocked: true,
     date: "Nov 2025",
   },
@@ -62,12 +61,22 @@ export const achievements: Achievement[] = [
   {
     id: "queue-architect",
     icon: "⚙️",
-    title: "Queue Architect",
+    title: "Heartbeat Architect",
     description:
-      "Replaced client-side schedulers with a containerized NestJS + BullMQ server-side heartbeat loop.",
-    metric: "NestJS + BullMQ",
+      "Replaced client-side schedulers with a NestJS + Upstash QStash loop — 23 modules, 56 services, Postgres-backed per-user locks, timezone-aware cron.",
+    metric: "NestJS · QStash · 5 users / batch",
     unlocked: true,
     date: "Nov 2025",
+  },
+  {
+    id: "vector-search",
+    icon: "🧭",
+    title: "Semantic Retrieval",
+    description:
+      "Shipped pgvector search with composite ranking: cosine × 30-day recency decay × type weight. IVFFlat-indexed, one Postgres RPC, no sidecar service.",
+    metric: "3 vector tables · IVFFlat lists=100",
+    unlocked: true,
+    date: "Jan 2026",
   },
   {
     id: "uiuc-grad",

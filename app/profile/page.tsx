@@ -11,13 +11,14 @@ export const metadata: Metadata = {
 };
 
 const stack = [
-  { area: "encryption", tools: "AES-GCM via Web Crypto", ref: "euno" },
-  { area: "queues", tools: "BullMQ + Redis + NestJS", ref: "euno" },
-  { area: "search", tools: "pgvector + embeddings", ref: "euno" },
-  { area: "mobile", tools: "React Native (Expo) + TypeScript", ref: "euno" },
-  { area: "backend", tools: "Supabase + PostgreSQL + Prisma", ref: "euno" },
-  { area: "frontend", tools: "Next.js + React + Tailwind" },
-  { area: "devops", tools: "Docker + Railway + Vercel + GitHub Actions" },
+  { area: "encryption", tools: "AES-GCM · Web Crypto · @noble/ciphers · per-record IVs", ref: "euno" },
+  { area: "queues", tools: "NestJS + Upstash QStash · Postgres-backed locks", ref: "euno" },
+  { area: "retrieval", tools: "pgvector (IVFFlat) · cosine × recency × type scoring", ref: "euno" },
+  { area: "mobile", tools: "React Native (Expo 54) · TypeScript · Face ID · HealthKit", ref: "euno" },
+  { area: "backend", tools: "NestJS 11 · Supabase · PostgreSQL · class-validator", ref: "euno" },
+  { area: "ai", tools: "Anthropic · OpenAI · LangFuse observability", ref: "euno" },
+  { area: "frontend", tools: "Next.js 15 · React 19 · Tailwind v4" },
+  { area: "devops", tools: "Docker · Railway · Vercel · GitHub Actions · Sentry" },
   { area: "languages", tools: "TypeScript · Python · C/C++ · Java" },
 ];
 
