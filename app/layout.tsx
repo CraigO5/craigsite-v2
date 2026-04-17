@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     template: "%s · Craig Ondevilla",
   },
   description:
-    "Software engineer building encrypted, AI-backed mobile and web systems. Currently shipping Euno solo.",
+    "Software engineer with an emphasis on AI-backed mobile and web systems. Currently leading engineering at Euno.",
   keywords: [
     "Craig Ondevilla",
     "software engineer",
@@ -54,14 +54,14 @@ export const metadata: Metadata = {
     url: "https://craigo.live",
     title: "Craig Ondevilla — Software Engineer",
     description:
-      "Software engineer building encrypted, AI-backed mobile and web systems. Currently shipping Euno solo.",
+      "Software engineer building encrypted, AI-backed mobile and web systems. Currently leading engineering at Euno.",
     siteName: "Craig Ondevilla",
   },
   twitter: {
     card: "summary_large_image",
     title: "Craig Ondevilla — Software Engineer",
     description:
-      "Software engineer building encrypted, AI-backed mobile and web systems. Currently shipping Euno solo.",
+      "Software engineer building encrypted, AI-backed mobile and web systems. Currently leading engineering at Euno.",
   },
   robots: {
     index: true,
@@ -77,9 +77,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
-          dangerouslySetInnerHTML={{ __html: themeInitScript }}
-        />
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body
         className={`${spaceGrotesk.variable} ${geistMono.variable} antialiased`}

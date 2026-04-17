@@ -63,18 +63,18 @@ export const achievements: Achievement[] = [
     icon: "⚙️",
     title: "Heartbeat Architect",
     description:
-      "Replaced client-side schedulers with a NestJS + Upstash QStash loop — 23 modules, 56 services, Postgres-backed per-user locks, timezone-aware cron.",
-    metric: "NestJS · QStash · 5 users / batch",
+      "Replaced client-side schedulers with a server-side AI loop — continuous per-user processing that runs whether the app is open or not.",
+    metric: "NestJS · QStash",
     unlocked: true,
     date: "Nov 2025",
   },
   {
     id: "vector-search",
     icon: "🧭",
-    title: "Semantic Retrieval",
+    title: "Personality-Aware RAG",
     description:
-      "Shipped pgvector search with composite ranking: cosine × 30-day recency decay × type weight. IVFFlat-indexed, one Postgres RPC, no sidecar service.",
-    metric: "3 vector tables · IVFFlat lists=100",
+      "Built a retrieval layer that factors in a user's personality profile — surfaces what's relevant to the person, not just what's close in vector space.",
+    metric: "pgvector · RAG · personality model",
     unlocked: true,
     date: "Jan 2026",
   },
@@ -103,13 +103,6 @@ export const achievements: Achievement[] = [
     icon: "✍️",
     title: "First Real Blog Post",
     description: "Write and publish a technical deep-dive.",
-    unlocked: false,
-  },
-  {
-    id: "open-source",
-    icon: "🌱",
-    title: "Open Source Contributor",
-    description: "Land a meaningful PR in a library I use daily.",
     unlocked: false,
   },
 ];

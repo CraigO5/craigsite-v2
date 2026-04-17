@@ -9,9 +9,9 @@ export type Experience = {
 
 export const experiences: Experience[] = [
   {
-    role: "Software Engineer",
+    role: "Lead Software Engineer",
     company: "Euno",
-    url: "https://euno.app",
+    url: "https://euno.life",
     dates: "October 2025 – Present",
     location: "Remote",
     bullets: [

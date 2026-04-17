@@ -156,7 +156,7 @@ export default function AppHome() {
       <div className="mb-12">
         <div className="mb-5 flex items-baseline justify-between">
           <h2 className="text-xl font-bold md:text-2xl">Recent activity</h2>
-          <span className="text-sm text-white/40">straight from GitHub</span>
+          <span className="text-sm text-white/40">what's been happening</span>
         </div>
         <ActivityFeed limit={8} />
       </div>

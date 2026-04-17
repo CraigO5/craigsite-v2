@@ -24,9 +24,9 @@ export const activity: ActivityEntry[] = [
     date: "2026-01",
     display: "Jan 2026",
     kind: "shipped",
-    title: "Composite semantic ranking in Euno",
+    title: "Shipped personality-aware RAG retrieval for Euno",
     description:
-      "pgvector search that weighs cosine × 30-day recency decay × type (portrait 1.3 → gap 0.7). IVFFlat-indexed, runs as a single Postgres RPC.",
+      "RAG layer that retrieves against a user's evolving personality profile — not just nearest-neighbor on text.",
     href: "/work/euno",
   },
   {
@@ -53,7 +53,7 @@ export const activity: ActivityEntry[] = [
     kind: "milestone",
     title: "Rearchitected Euno's backend",
     description:
-      "Replaced client-side schedulers with a NestJS 23-module service + Upstash QStash heartbeat loop — 56 services, timezone-aware hourly cron, Postgres-backed user locks.",
+      "Replaced client-side schedulers with a server-side AI loop — continuous per-user processing, timezone-aware delivery, graceful degradation.",
     href: "/work/euno",
   },
   {

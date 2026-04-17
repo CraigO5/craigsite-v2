@@ -23,10 +23,10 @@ export const caseStudies: CaseStudy[] = [
     title: "Euno",
     tagline:
       "Turning user conversations into a structured, queryable psychological knowledge base.",
-    role: "Software Engineer (solo)",
+    role: "Lead Software Engineer",
     dates: "October 2025 – Present",
     status: "Ongoing",
-    url: "https://euno.app",
+    url: "https://euno.life",
     stack: [
       "React Native (Expo 54)",
       "TypeScript",
@@ -41,45 +41,29 @@ export const caseStudies: CaseStudy[] = [
       "Sentry + LangFuse",
     ],
     metrics: [
-      { label: "Backend services", value: "56" },
-      { label: "NestJS modules", value: "23" },
-      { label: "API controllers", value: "14" },
+      { label: "Concurrent users", value: "50+" },
       { label: "Backend LOC", value: "~22k" },
-      { label: "Mobile TS files", value: "~1.5k" },
-      { label: "pgvector tables", value: "3" },
       { label: "Test files", value: "30" },
-      { label: "Concurrent heartbeat users", value: "5 / batch" },
+      { label: "Migration", value: "Swift → RN" },
     ],
     summary:
-      "I rebuilt Euno end-to-end as the sole engineer: migrated the mobile app from Swift to React Native, replaced client-side schedulers with a server-side heartbeat loop, and architected the encryption, retrieval, and AI-agent layers on top of Supabase. The backend is a 23-module NestJS service talking to Postgres + pgvector, coordinated by Upstash QStash and fed by Anthropic and OpenAI. The mobile app ships biometric-gated, field-level AES-GCM encryption, offline-first caching, and HealthKit sync.",
+      "Started as the sole engineer and now lead the team building Euno. I rebuilt the product end-to-end — mobile app, backend, encryption, retrieval, and AI pipelines — and now own the technical direction. The product turns user conversations into a structured, queryable knowledge base that drives a personalized AI loop running continuously in the background.",
     sections: [
       {
         heading: "Starting point",
-        body: "Euno was a Swift iOS app with client-side scheduling, no server-side AI loop, and encryption that couldn't survive production. The app couldn't run on Android, state was trapped on the device, and adding a social layer or background AI was architecturally impossible. I took it over solo and committed to rebuilding the mobile app, backend, encryption, retrieval, and AI pipelines without pausing shipping.",
+        body: "Euno was a Swift iOS app with client-side scheduling and no real backend AI loop. It couldn't run on Android, state was trapped on-device, and scaling to a social layer or persistent AI was architecturally off the table. I took it over solo and rebuilt everything without pausing shipping.",
       },
       {
-        heading: "Architecture at a glance",
-        body: "Expo / React Native client → NestJS 11 API (23 modules, 14 controllers, 56 services) → Supabase Postgres with pgvector and RLS. Long-running work runs on a timezone-aware hourly cron that dispatches through Upstash QStash, so I get serverless task semantics without operating Redis myself. Anthropic + OpenAI SDKs sit behind a thin service abstraction that logs every call (model, tokens, userId) to Supabase and LangFuse. Sentry handles frontend errors; a global NestJS HttpExceptionFilter makes sure the API never leaks schema info on error.",
+        heading: "What I built",
+        body: "A cross-platform React Native app (migrated from Swift) with biometric-gated field-level encryption, offline-first caching, and HealthKit sync. A modular NestJS backend handling auth, AI generation, semantic retrieval, social features, billing, and notifications — with full test coverage and production-grade error handling. A background AI loop that runs continuously per-user, surfacing insights from conversation history without requiring the app to be open.",
       },
       {
-        heading: "AES-GCM field-level encryption",
-        body: "Every encrypted field gets a fresh 12-byte random IV, concatenated with the ciphertext, and stored base64. Keys are per-user and derived on the client behind a biometric gate (expo-local-authentication + expo-secure-store). The server enforces ENCRYPTION_ENABLED=true and validates the key at startup in production — no silent fallback. In dev, a logged plaintext fallback keeps the iteration loop fast without hiding bugs in prod.",
-      },
-      {
-        heading: "Heartbeat loop: a distributed state machine in Postgres",
-        body: "The core of Euno's AI is a hourly loop that decides, per user, whether to generate a new insight. An @Cron job pulls active users from notification_preferences, batches them 5 at a time, and for each user acquires a Postgres-backed lock (a small state machine in Supabase that behaves like a Redis SETNX). If the lock is free, it runs the pipeline: a Decider checks whether new sessions or gaps arrived since last run, a Gap Analyzer finds tension candidates, a Tension Analyzer matches them via pgvector, a Generator drafts a thought with Anthropic or OpenAI, and a Delivery service schedules the notification. Every step logs to LangFuse and degrades to an empty result on failure so one bad user can't wedge the loop.",
-      },
-      {
-        heading: "Semantic search with composite scoring",
-        body: "User memory lives in a unified user_search_chunks table (snapshots, tensions, facts, portraits, thoughts, gaps, summaries) plus two typed embedding tables, all indexed with IVFFlat (lists=100) over pgvector. The search_user RPC doesn't just sort by cosine similarity — it multiplies cosine × exponential recency decay (30-day half-life) × a type weight (portrait 1.3, tension 1.2, fact/summary 1.1, snapshot 1.0, thought 0.8, gap 0.7). The result is recall that matches human intuition: 'the important stuff, lately' instead of 'whatever was closest in vector space'. A separate match_tensions RPC surfaces semantically similar open tensions without any LLM call.",
-      },
-      {
-        heading: "Timezone-correct global cron",
-        body: "Daily recaps have to arrive at 9 PM in the user's timezone, across DST, without drifting. Rather than compute offsets in application code, the hourly cron asks Postgres 'is it 21:00 local for this user right now?' using the user's timezone string. Application code never touches offsets and DST transitions are correct for free.",
+        heading: "The hard parts",
+        body: "Encryption that's actually correct at the field level, not just in transit. A background AI pipeline that degrades gracefully and can't wedge itself on a bad user. Timezone-correct global notifications. And the core retrieval problem: standard semantic search returns what's closest in vector space — Euno needs to surface what's most relevant to *this specific user's* personality and psychological state. I built a RAG retrieval layer that factors in a user's evolving personality profile when deciding what to retrieve, so the AI isn't just pattern-matching on text — it's reasoning over a model of the person. Each of these is a solved problem individually. Owning all of them at once, without a team, is the actual challenge.",
       },
       {
         heading: "What I'd do differently",
-        body: "I was aggressive about production safety (startup checks, generic error responses, rate limiting, RLS, locked heartbeats) and honest about what wasn't ready — a COMPLIANCE_AUDIT.md in the repo tracks HIPAA gaps that I've been closing on a schedule. One call I'd revisit: I initially planned BullMQ + Redis for the job queue and ended up switching to Upstash QStash mid-build. QStash's HTTP semantics were the right fit for a serverless-friendly deploy, but I paid for the pivot in the heartbeat locking code. I'd pick the queue earlier and design the lock primitive around it.",
+        body: "I was aggressive about production safety early — startup validation, rate limiting, RLS, generic error responses — and I'd do that again. The one architectural call I'd revisit is the job queue choice. I switched queues mid-build when requirements became clearer, and that pivot cost time in the lock and retry logic. Picking the queue first and designing the distributed state around it would've been cleaner.",
       },
     ],
   },

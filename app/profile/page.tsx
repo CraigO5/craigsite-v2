@@ -7,13 +7,13 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Profile",
   description:
-    "Craig Ondevilla — CS grad from UIUC. Currently building Euno solo. Work timeline and stack.",
+    "Craig Ondevilla — CS grad from UIUC. Currently leading engineering at Euno. Work timeline and stack.",
 };
 
 const stack = [
   { area: "encryption", tools: "AES-GCM · Web Crypto · @noble/ciphers · per-record IVs", ref: "euno" },
-  { area: "queues", tools: "NestJS + Upstash QStash · Postgres-backed locks", ref: "euno" },
-  { area: "retrieval", tools: "pgvector (IVFFlat) · cosine × recency × type scoring", ref: "euno" },
+  { area: "queues", tools: "NestJS + Upstash QStash", ref: "euno" },
+  { area: "retrieval", tools: "pgvector · semantic search", ref: "euno" },
   { area: "mobile", tools: "React Native (Expo 54) · TypeScript · Face ID · HealthKit", ref: "euno" },
   { area: "backend", tools: "NestJS 11 · Supabase · PostgreSQL · class-validator", ref: "euno" },
   { area: "ai", tools: "Anthropic · OpenAI · LangFuse observability", ref: "euno" },

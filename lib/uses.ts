@@ -115,9 +115,9 @@ export const usesData: UsesCategory[] = [
         why: "Every call logged with tokens, latency, userId, and prompt. Makes regressions visible before users notice.",
       },
       {
-        name: "pgvector (IVFFlat)",
+        name: "pgvector",
         role: "Retrieval",
-        why: "Same Postgres that holds the rows. Composite ranking = cosine × recency × type weight, not just nearest neighbor.",
+        why: "Same Postgres that holds the rows. No sidecar retrieval service — semantic search lives where the data does.",
       },
     ],
   },

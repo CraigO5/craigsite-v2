@@ -8,7 +8,14 @@
       "Bash(npx next:*)",
       "Bash(xargs grep:*)",
       "Bash(node -e \"console.log\\(require\\('./package.json'\\).dependencies['server-only'] || 'not-installed'\\)\")",
-      "Bash(wc -l \"F:/euno/euno-backend/src\"/**/*.ts)"
+      "Bash(wc -l \"F:/euno/euno-backend/src\"/**/*.ts)",
+      "Bash(curl -s \"https://api.github.com/users/CraigO5/events/public?per_page=5\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(f'{len\\(d\\)} events'\\); [print\\(e['type'], e['repo']['name']\\) for e in d[:5]]\")",
+      "Bash(node -e \"const d=JSON.parse\\(require\\('fs'\\).readFileSync\\('/dev/stdin','utf8'\\)\\); console.log\\(d.length,'events'\\); d.slice\\(0,5\\).forEach\\(e=>console.log\\(e.type, e.repo.name\\)\\)\")",
+      "Bash(curl -s \"https://api.github.com/users/CraigO5/events/public?per_page=5\" -o C:/temp/ghevents.json)",
+      "Bash(node -e \"const d=require\\('C:/temp/ghevents.json'\\); console.log\\(d.length,'events'\\); d.slice\\(0,5\\).forEach\\(e=>console.log\\(e.type, e.repo.name\\)\\)\")",
+      "Skill(update-config)",
+      "Skill(update-config:*)"
     ]
   }
 }
