@@ -1,55 +1,82 @@
 import type { Metadata } from "next";
-import ScreenHeader from "@/components/custom/ScreenHeader";
+import NavBar from "@/components/NavBar";
+import PageFooter from "@/components/PageFooter";
 import { changelog } from "@/lib/changelog";
 
 export const metadata: Metadata = {
   title: "Changelog",
-  description: "Release notes for this site, versioned like a product.",
+  description: "Versions of the portfolio itself.",
 };
 
 export default function ChangelogPage() {
   return (
-    <main className="overflow-x-hidden pt-24 pb-28 md:pt-32">
-      <section className="mx-auto max-w-3xl px-6 pb-20">
-        <ScreenHeader
-          title="Changelog."
-          subtitle="This site ships like a product — here's the history."
-        />
+    <main id="top" className="min-h-screen bg-[#1a1a1a] text-[#f4eee5]">
+      <NavBar theme="dark" />
 
-        <ol className="relative space-y-10">
-          <div className="absolute top-3 bottom-3 left-[11px] w-px bg-white/10" />
+      <article className="border-l border-r border-[#333]">
+        <header className="border-b border-[#333] px-8 py-20">
+          <p className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
+            [009] / CHANGELOG
+          </p>
+          <h1 className="mt-8 font-black leading-[0.85] tracking-[-0.07em] text-[140px]">
+            VER<span className="text-[#38bdf8]">.</span>
+            <br />
+            HISTORY.
+          </h1>
+          <p
+            className="mt-8 max-w-2xl text-[18px] leading-[1.5]"
+            style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
+          >
+            <em>
+              Treating the portfolio itself as a shipped product. Newest
+              first.
+            </em>
+          </p>
+        </header>
 
-          {changelog.map((entry) => (
-            <li key={entry.version} className="relative pl-10">
-              <span className="absolute top-5 left-[5px] h-3 w-3 rounded-full border-2 border-background bg-accent" />
-
-              <article className="rounded-2xl border border-white/10 bg-white/[0.03] p-6">
-                <header className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-                  <div className="flex items-baseline gap-3">
-                    <h2 className="font-mono text-lg font-bold text-accent">
-                      {entry.version}
-                    </h2>
-                    <p className="text-base font-semibold">{entry.headline}</p>
-                  </div>
-                  <time className="text-xs text-white/40">{entry.display}</time>
-                </header>
-                <ul className="space-y-1.5 text-sm text-white/70 leading-relaxed">
-                  {entry.bullets.map((b, i) => (
-                    <li key={i} className="flex gap-2">
-                      <span className="mt-2 h-1 w-1 flex-shrink-0 rounded-full bg-white/30" />
-                      <span>{b}</span>
-                    </li>
-                  ))}
-                </ul>
-              </article>
+        <ol>
+          {changelog.map((entry, i) => (
+            <li
+              key={entry.version}
+              className="border-b border-[#333] px-8 py-16"
+            >
+              <div className="grid grid-cols-12 gap-6">
+                <div className="col-span-12 md:col-span-3">
+                  <p className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
+                    [{String(changelog.length - i).padStart(2, "0")}]
+                  </p>
+                  <p className="mt-4 font-black leading-none tracking-[-0.04em] text-[36px] text-[#38bdf8]">
+                    {entry.version.toUpperCase()}
+                  </p>
+                  <p className="mt-3 text-[11px] font-bold tracking-[0.25em] text-[#888]">
+                    {entry.display.toUpperCase()}
+                  </p>
+                </div>
+                <div className="col-span-12 md:col-span-9">
+                  <h2 className="font-black leading-[0.95] tracking-[-0.03em] text-[40px]">
+                    {entry.headline.toUpperCase()}
+                  </h2>
+                  <ul className="mt-8 space-y-4 border-t border-[#333] pt-6">
+                    {entry.bullets.map((b, j) => (
+                      <li
+                        key={j}
+                        className="flex gap-4 text-[15px] leading-[1.6]"
+                      >
+                        <span className="shrink-0 text-[11px] font-bold tracking-[0.25em] text-[#888]">
+                          {String(j + 1).padStart(2, "0")}
+                        </span>
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </li>
           ))}
         </ol>
+      </article>
 
-        <p className="mt-12 border-t border-white/5 pt-6 text-center text-xs text-white/30">
-          Versioned by hand. The git log has the full story.
-        </p>
-      </section>
+      <PageFooter theme="dark" />
     </main>
   );
 }

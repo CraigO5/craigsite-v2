@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { ArrowUpRight, Mail } from "lucide-react";
-import { SiGithub, SiLinkedin } from "react-icons/si";
-import ScreenHeader from "@/components/custom/ScreenHeader";
+import NavBar from "@/components/NavBar";
+import PageFooter from "@/components/PageFooter";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -9,53 +8,91 @@ export const metadata: Metadata = {
     "Get in touch with Craig Ondevilla — open to engineering roles, consulting, and collaborations.",
 };
 
+const links = [
+  {
+    label: "EMAIL",
+    value: "craigondevilla1231@gmail.com",
+    href: "mailto:craigondevilla1231@gmail.com",
+  },
+  {
+    label: "LINKEDIN",
+    value: "linkedin.com/in/craig-ondevilla",
+    href: "https://linkedin.com/in/craig-ondevilla",
+  },
+  {
+    label: "GITHUB",
+    value: "github.com/CraigO5",
+    href: "https://github.com/CraigO5",
+  },
+  {
+    label: "RESUME",
+    value: "Download PDF",
+    href: "/resume.pdf",
+  },
+];
+
 export default function ContactPage() {
   return (
-    <main className="overflow-x-hidden pt-24 pb-28 md:pt-32">
-      <section className="mx-auto max-w-5xl px-6 pb-20">
-        <ScreenHeader
-          title="Let's talk."
-          subtitle="Open to engineering roles, collaborations, or just a friendly hello."
-        />
+    <main id="top" className="min-h-screen bg-[#1a1a1a] text-[#f4eee5]">
+      <NavBar theme="dark" />
 
-        <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-accent/10 via-surface to-surface p-8 backdrop-blur-sm md:p-12">
-          <p className="mb-8 max-w-xl text-lg text-white/70 leading-relaxed">
-            Open to engineering roles, consulting gigs, and collaborations on
-            the kind of thing you'd want to read a case study about.
+      <article className="border-l border-r border-[#333]">
+        <header className="border-b border-[#333] px-8 py-20">
+          <p className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
+            [006] / CONTACT
           </p>
+          <h1 className="mt-8 font-black leading-[0.85] tracking-[-0.07em] text-[140px]">
+            GET IN
+            <br />
+            TOUCH<span className="text-[#38bdf8]">.</span>
+          </h1>
+        </header>
 
-          <a
-            href="mailto:craig.brdt505@gmail.com"
-            className="group inline-flex items-center gap-3 rounded-2xl border border-accent/30 bg-accent/10 px-5 py-3 text-lg font-medium text-accent transition-all duration-200 hover:border-accent/60 hover:bg-accent/15"
+        <section className="border-b border-[#333] px-8 py-16">
+          <p
+            className="max-w-2xl text-[22px] leading-[1.5] text-[#f4eee5]"
+            style={{ fontFamily: "Georgia, 'Times New Roman', serif" }}
           >
-            <Mail size={18} />
-            craig.brdt505@gmail.com
-            <ArrowUpRight
-              size={16}
-              className="transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            />
-          </a>
+            <em>
+              Open to engineering roles, collaborations, or anything you&apos;d
+              want to read a case study about.
+            </em>
+          </p>
+        </section>
 
-          <div className="mt-8 flex flex-wrap gap-2">
-            <a
-              href="https://github.com/craigsterr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70 transition-all duration-200 hover:border-white/25 hover:text-white"
-            >
-              <SiGithub size={14} /> github.com/craigsterr
-            </a>
-            <a
-              href="https://www.linkedin.com/in/craig-ondevilla-8106b4191"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70 transition-all duration-200 hover:border-white/25 hover:text-white"
-            >
-              <SiLinkedin size={14} /> linkedin
-            </a>
-          </div>
-        </div>
-      </section>
+        <ul className="grid grid-cols-1 border-b border-[#333] md:grid-cols-2">
+          {links.map((l, i) => {
+            const external = l.href.startsWith("http");
+            return (
+              <li
+                key={l.label}
+                className={`${
+                  i % 2 === 0 ? "md:border-r border-[#333]" : ""
+                } ${i < links.length - 2 ? "border-b border-[#333]" : ""}`}
+              >
+                <a
+                  href={l.href}
+                  target={external ? "_blank" : undefined}
+                  rel={external ? "noopener noreferrer" : undefined}
+                  className="group block px-8 py-10 transition-colors hover:bg-[#38bdf8] hover:text-[#1a1a1a]"
+                >
+                  <p className="text-[11px] font-bold tracking-[0.25em] text-[#888] group-hover:text-[#1a1a1a]">
+                    {l.label}
+                  </p>
+                  <p className="mt-4 break-words font-black leading-none tracking-[-0.03em] text-[28px]">
+                    {l.value}
+                  </p>
+                  <p className="mt-4 text-[11px] font-bold tracking-[0.25em]">
+                    {external ? "↗" : "→"}
+                  </p>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </article>
+
+      <PageFooter theme="dark" />
     </main>
   );
 }

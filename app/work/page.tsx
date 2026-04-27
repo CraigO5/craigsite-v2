@@ -1,97 +1,131 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import NavBar from "@/components/NavBar";
+import PageFooter from "@/components/PageFooter";
 import { caseStudies } from "@/lib/case-studies";
 import { projects } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Work",
   description:
-    "Case studies and projects by Craig Ondevilla — including Euno, CoverMe, and Kapwa Codefest 2025.",
+    "Case studies and side projects by Craig Ondevilla — Euno, CoverMe, Pisayian, Spyfall and more.",
 };
 
 export default function WorkIndex() {
   return (
-    <div className="min-h-screen pb-28">
-      <main className="mx-auto max-w-5xl px-6 pt-32 pb-24">
-        <header className="mb-12">
-          <p className="mb-2 text-sm text-accent">My work</p>
-          <h1 className="font-bold">Things I've built.</h1>
-          <p className="mt-6 max-w-2xl text-lg text-white/70 leading-relaxed">
-            A mix of shipped products, hackathon wins, and side projects.
-            Deep-dives first, then the rest.
+    <main id="top" className="min-h-screen bg-[#1a1a1a] text-[#f4eee5]">
+      <NavBar theme="dark" />
+
+      <section className="border-b border-l border-r border-[#333] px-8 py-20">
+        <p className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
+          [INDEX] / SELECTED WORK
+        </p>
+        <h1 className="mt-6 font-black leading-[0.85] tracking-[-0.07em] text-[100px]">
+          THE WORK<span className="text-[#38bdf8]">.</span>
+        </h1>
+        <p className="mt-8 max-w-xl text-[15px] leading-[1.6] text-[#888]">
+          A mix of shipped products, hackathon wins, and side projects. Click
+          in for the long version.
+        </p>
+      </section>
+
+      <section className="border-l border-r border-[#333]">
+        <header className="border-b border-[#333] px-8 py-10">
+          <p className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
+            [CASE STUDIES]
           </p>
         </header>
+        <ol>
+          {caseStudies.map((cs, i) => {
+            const num = String(i + 1).padStart(3, "0");
+            return (
+              <li key={cs.slug} className="border-b border-[#333]">
+                <Link
+                  href={`/work/${cs.slug}`}
+                  className="grid grid-cols-12 items-baseline gap-6 px-8 py-10 transition-colors hover:bg-[#222]"
+                >
+                  <span className="col-span-12 text-[11px] font-bold tracking-[0.25em] text-[#888] md:col-span-1">
+                    [{num}]
+                  </span>
+                  <h2 className="col-span-12 font-black leading-[0.95] tracking-[-0.04em] text-[56px] md:col-span-4">
+                    {cs.title.toUpperCase()}
+                  </h2>
+                  <p className="col-span-12 text-[15px] leading-[1.5] md:col-span-4">
+                    {cs.tagline}
+                  </p>
+                  <p className="col-span-10 text-[11px] font-bold tracking-[0.2em] text-[#888] md:col-span-2">
+                    {cs.stack.slice(0, 3).join(" · ").toUpperCase()}
+                  </p>
+                  <span className="col-span-2 text-right text-[24px] font-black md:col-span-1">
+                    →
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ol>
+      </section>
 
-        <section className="mb-16">
-          <h2 className="mb-5 text-xl font-bold md:text-2xl">Case studies</h2>
-          <div className="flex flex-col gap-4">
-            {caseStudies.map((cs) => (
-              <Link
-                key={cs.slug}
-                href={`/work/${cs.slug}`}
-                className="group rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40 hover:bg-white/8 md:p-8"
-              >
-                <div className="mb-3 flex items-center justify-between">
-                  <h3 className="text-2xl font-bold">{cs.title}</h3>
-                  <span className="text-xs text-accent">{cs.status}</span>
-                </div>
-                <p className="mb-4 text-white/70 leading-relaxed">
-                  {cs.tagline}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {cs.stack.slice(0, 6).map((tool) => (
-                    <span
-                      key={tool}
-                      className="rounded-full border border-white/10 px-2.5 py-0.5 text-xs text-white/60"
-                    >
-                      {tool}
-                    </span>
-                  ))}
-                </div>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <section>
-          <h2 className="mb-5 text-xl font-bold md:text-2xl">Other projects</h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {projects.map((p) => (
+      <section className="border-l border-r border-[#333]">
+        <header className="border-b border-[#333] px-8 py-10">
+          <p className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
+            [OTHER PROJECTS]
+          </p>
+          <h2 className="mt-3 font-black leading-[0.95] tracking-[-0.04em] text-[40px]">
+            ALSO BUILT.
+          </h2>
+        </header>
+        <ul className="grid grid-cols-1 md:grid-cols-2">
+          {projects.map((p, i) => (
+            <li
+              key={p.title}
+              className={`${
+                i % 2 === 0 ? "md:border-r border-[#333]" : ""
+              } ${i < projects.length - (projects.length % 2 === 0 ? 2 : 1) ? "border-b border-[#333]" : ""} ${
+                projects.length % 2 === 1 && i === projects.length - 1
+                  ? "md:col-span-2 border-b border-[#333]"
+                  : ""
+              }`}
+            >
               <a
-                key={p.title}
                 href={p.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-accent/40"
+                className="group flex flex-col h-full transition-colors hover:bg-[#222]"
               >
-                <div className="relative aspect-[16/10] overflow-hidden bg-surface-raised">
+                <div className="relative aspect-[16/10] overflow-hidden border-b border-[#333] bg-[#222]">
                   <Image
-                    alt={p.title}
                     src={p.image}
-                    width={640}
-                    height={400}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    alt={p.title}
+                    fill
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    className="object-cover grayscale transition-all duration-300 group-hover:grayscale-0"
                   />
                 </div>
-                <div className="p-5">
-                  <div className="mb-1 flex items-center justify-between gap-2">
-                    <h3 className="text-lg font-bold">{p.title}</h3>
-                    <ArrowUpRight
-                      size={14}
-                      className="flex-shrink-0 text-white/30 transition-colors duration-200 group-hover:text-accent"
-                    />
+                <div className="flex flex-1 flex-col justify-between gap-6 px-8 py-8">
+                  <div>
+                    <div className="flex items-baseline justify-between gap-4">
+                      <h3 className="font-black leading-none tracking-[-0.04em] text-[28px]">
+                        {p.title.toUpperCase()}
+                      </h3>
+                      <span className="text-[20px]">↗</span>
+                    </div>
+                    <p className="mt-4 text-[14px] leading-[1.5] text-[#f4eee5]">
+                      {p.description}
+                    </p>
                   </div>
-                  <p className="text-sm text-white/60 leading-relaxed">
-                    {p.description}
+                  <p className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
+                    {p.technologies.join(" · ").toUpperCase()}
                   </p>
                 </div>
               </a>
-            ))}
-          </div>
-        </section>
-      </main>
-    </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <PageFooter theme="dark" />
+    </main>
   );
 }

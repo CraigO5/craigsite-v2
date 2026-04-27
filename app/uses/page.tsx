@@ -1,61 +1,80 @@
 import type { Metadata } from "next";
-import ScreenHeader from "@/components/custom/ScreenHeader";
+import NavBar from "@/components/NavBar";
+import PageFooter from "@/components/PageFooter";
 import { usesData } from "@/lib/uses";
 
 export const metadata: Metadata = {
   title: "Uses",
-  description: "The stack Craig reaches for — and why.",
+  description: "Tools, languages, and services Craig Ondevilla reaches for.",
 };
 
 export default function UsesPage() {
   return (
-    <main className="overflow-x-hidden pt-24 pb-28 md:pt-32">
-      <section className="mx-auto max-w-3xl px-6 pb-20">
-        <ScreenHeader
-          title="Uses."
-          subtitle="The daily stack — opinionated, with reasons."
-        />
+    <main id="top" className="min-h-screen bg-[#1a1a1a] text-[#f4eee5]">
+      <NavBar theme="dark" />
 
-        <div className="space-y-10">
-          {usesData.map((cat) => (
-            <section key={cat.id} id={cat.id}>
-              <div className="mb-4">
-                <h2 className="text-xl font-bold md:text-2xl">{cat.title}</h2>
-                <p className="text-sm text-white/50">{cat.subtitle}</p>
+      <article className="border-l border-r border-[#333]">
+        <header className="border-b border-[#333] px-8 py-20">
+          <p className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
+            [007] / WHAT I USE
+          </p>
+          <h1 className="mt-8 font-black leading-[0.85] tracking-[-0.07em] text-[140px]">
+            THE
+            <br />
+            STACK<span className="text-[#38bdf8]">.</span>
+          </h1>
+          <p className="mt-8 max-w-2xl text-[18px] leading-[1.6]">
+            Tools, languages, and services I reach for day-to-day. Opinions
+            are mine, defaults are mostly the same as everyone else&apos;s.
+          </p>
+        </header>
+
+        {usesData.map((cat, i) => {
+          const num = String(i + 1).padStart(2, "0");
+          return (
+            <section
+              key={cat.id}
+              className="border-b border-[#333] px-8 py-16"
+            >
+              <div className="grid grid-cols-12 gap-6">
+                <div className="col-span-12 md:col-span-3">
+                  <p className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
+                    [{num}]
+                  </p>
+                  <h2 className="mt-4 font-black leading-[0.9] tracking-[-0.04em] text-[40px]">
+                    {cat.title.toUpperCase()}
+                  </h2>
+                  <p className="mt-3 max-w-xs text-[14px] leading-[1.5] text-[#888]">
+                    {cat.subtitle}
+                  </p>
+                </div>
+                <ul className="col-span-12 md:col-span-9 divide-y divide-[#333] border-y border-[#333]">
+                  {cat.items.map((item) => (
+                    <li
+                      key={item.name}
+                      className="grid grid-cols-12 gap-4 py-6"
+                    >
+                      <div className="col-span-12 md:col-span-4">
+                        <h3 className="font-black leading-none tracking-[-0.03em] text-[20px]">
+                          {item.name.toUpperCase()}
+                        </h3>
+                        <p className="mt-2 text-[11px] font-bold tracking-[0.2em] text-[#38bdf8]">
+                          {item.role.toUpperCase()}
+                        </p>
+                      </div>
+                      <p className="col-span-12 text-[14px] leading-[1.6] md:col-span-8">
+                        {item.why}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="divide-y divide-white/5 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
-                {cat.items.map((item) => (
-                  <li
-                    key={item.name}
-                    className="flex flex-col gap-2 px-5 py-4 md:flex-row md:items-baseline md:gap-6"
-                  >
-                    <div className="md:w-56 md:flex-shrink-0">
-                      <p className="font-semibold">{item.name}</p>
-                      <p className="text-xs text-white/40">{item.role}</p>
-                    </div>
-                    <p className="flex-1 text-sm text-white/70 leading-relaxed">
-                      {item.why}
-                    </p>
-                  </li>
-                ))}
-              </ul>
             </section>
-          ))}
-        </div>
+          );
+        })}
+      </article>
 
-        <p className="mt-12 border-t border-white/5 pt-6 text-center text-xs text-white/30">
-          Inspired by{" "}
-          <a
-            href="https://uses.tech"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-white/50 hover:text-accent"
-          >
-            uses.tech
-          </a>
-          . Updated as the stack shifts.
-        </p>
-      </section>
+      <PageFooter theme="dark" />
     </main>
   );
 }
