@@ -29,5 +29,71 @@ body {
 
 ::selection {
   background: var(--color-accent);
-  color: var(--color-fg);
+  color: var(--color-fg-inverse);
+}
+
+/* Custom cursor — hide native on hover-capable devices */
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body,
+  a,
+  button,
+  [role="button"] {
+    cursor: none;
+  }
+}
+
+/* Hero responsive grid:
+   Mobile = single column stack.
+   Desktop (md+) = 4-col × 5-row 700px grid per spec. */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "nav"
+    "hero"
+    "portrait"
+    "curr"
+    "stat"
+    "p0"
+    "p1"
+    "p2"
+    "p3"
+    "foot";
+}
+
+@media (min-width: 768px) {
+  .hero-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: 80px 200px 200px 120px 100px;
+    grid-template-areas:
+      "nav nav nav nav"
+      "hero hero portrait curr"
+      "hero hero portrait stat"
+      "p0 p1 p2 p3"
+      "foot foot foot foot";
+    height: 700px;
+  }
+}
+
+/* Marquee */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
 }

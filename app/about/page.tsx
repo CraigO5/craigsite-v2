@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import NavBar from "@/components/NavBar";
 import PageFooter from "@/components/PageFooter";
 import { experiences } from "@/lib/experience";
@@ -28,7 +29,7 @@ export default function AboutPage() {
           <p className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
             [005] / ABOUT
           </p>
-          <h1 className="mt-8 font-black leading-[0.85] tracking-[-0.07em] text-[140px]">
+          <h1 className="mt-8 font-black leading-[0.85] tracking-[-0.07em] text-[56px] sm:text-[80px] md:text-[110px] lg:text-[140px]">
             HI, I&apos;M
             <br />
             CRAIG<span className="text-[#38bdf8]">.</span>
@@ -157,20 +158,23 @@ export default function AboutPage() {
             [LINKS]
           </p>
           <div className="mt-6 flex flex-wrap gap-x-10 gap-y-3 text-[14px] font-medium">
-            <a
+            <Link
               href="/contact"
+              data-cursor="→ CONTACT"
               className="underline underline-offset-4 decoration-[2px] hover:decoration-[3px]"
             >
               Contact →
-            </a>
-            <a
+            </Link>
+            <Link
               href="/work"
+              data-cursor="→ WORK"
               className="underline underline-offset-4 decoration-[2px] hover:decoration-[3px]"
             >
               See the work →
-            </a>
+            </Link>
             <a
               href="/resume.pdf"
+              data-cursor="↓ DOWNLOAD"
               className="underline underline-offset-4 decoration-[2px] hover:decoration-[3px]"
             >
               Resume (PDF) ↗

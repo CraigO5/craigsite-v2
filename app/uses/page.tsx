@@ -18,7 +18,7 @@ export default function UsesPage() {
           <p className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
             [007] / WHAT I USE
           </p>
-          <h1 className="mt-8 font-black leading-[0.85] tracking-[-0.07em] text-[140px]">
+          <h1 className="mt-8 font-black leading-[0.85] tracking-[-0.07em] text-[56px] sm:text-[80px] md:text-[110px] lg:text-[140px]">
             THE
             <br />
             STACK<span className="text-[#38bdf8]">.</span>

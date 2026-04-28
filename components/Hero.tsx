@@ -1,5 +1,9 @@
 import Link from "next/link";
-import Image from "next/image";
+import HeadlineStagger from "@/components/HeadlineStagger";
+import PortraitParallax from "@/components/PortraitParallax";
+import ScrambleText from "@/components/ScrambleText";
+import CountUp from "@/components/CountUp";
+import LiveClock from "@/components/LiveClock";
 
 type Project = {
   num: string;
@@ -40,43 +44,43 @@ const projects: Project[] = [
 export default function Hero() {
   return (
     <main className="min-h-screen">
-      <div
-        className="grid h-[700px] border-t border-l border-[#333]"
-        style={{
-          gridTemplateColumns: "repeat(4, minmax(0, 1fr))",
-          gridTemplateRows: "80px 200px 200px 120px 100px",
-          gridTemplateAreas: `
-            "nav nav nav nav"
-            "hero hero portrait curr"
-            "hero hero portrait stat"
-            "p0 p1 p2 p3"
-            "foot foot foot foot"
-          `,
-        }}
-      >
-        {/* Row 1 — top nav */}
+      <div className="hero-grid border-t border-l border-[#333]">
+        {/* Nav */}
         <header
           style={{ gridArea: "nav" }}
-          className="flex items-center justify-between border-r border-b border-[#333] px-8"
+          className="flex flex-col gap-3 border-r border-b border-[#333] px-5 py-4 md:h-20 md:flex-row md:items-center md:justify-between md:gap-0 md:px-8 md:py-0"
         >
-          <span className="text-[12px] font-bold tracking-[0.25em]">
-            CRAIG ONDEVILLA — INDEX
-          </span>
-          <nav className="flex gap-10 text-[12px] font-bold tracking-[0.25em]">
+          <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+            <Link
+              href="/"
+              data-cursor="→ HOME"
+              className="text-[11px] font-bold tracking-[0.25em] hover:underline hover:underline-offset-4 hover:decoration-[3px] md:text-[12px]"
+            >
+              CRAIG ONDEVILLA<span className="hidden sm:inline"> — INDEX</span>
+            </Link>
+            <span className="hidden md:inline text-[#444]">·</span>
+            <span className="hidden md:inline">
+              <LiveClock />
+            </span>
+          </div>
+          <nav className="flex gap-5 text-[11px] font-bold tracking-[0.25em] md:gap-10 md:text-[12px]">
             <Link
               href="/work"
+              data-cursor="→ WORK"
               className="hover:underline hover:underline-offset-4 hover:decoration-[3px]"
             >
               WORK
             </Link>
             <Link
               href="/about"
+              data-cursor="→ ABOUT"
               className="hover:underline hover:underline-offset-4 hover:decoration-[3px]"
             >
               ABOUT
             </Link>
             <Link
               href="/contact"
+              data-cursor="→ CONTACT"
               className="hover:underline hover:underline-offset-4 hover:decoration-[3px]"
             >
               CONTACT
@@ -84,43 +88,38 @@ export default function Hero() {
           </nav>
         </header>
 
-        {/* Rows 2–3 — display headline (cols 1–2) */}
+        {/* Hero headline */}
         <section
           style={{ gridArea: "hero" }}
-          className="flex items-center border-r border-b border-[#333] px-8"
+          className="flex items-center border-r border-b border-[#333] px-5 py-12 md:px-8 md:py-0"
         >
-          <h1 className="font-black leading-[0.85] tracking-[-0.07em] text-[80px] md:text-[100px] lg:text-[120px]">
-            FOUNDING
-            <br />
-            ENGINEER
-            <span className="ml-1 inline-block align-top text-[44px] tracking-normal">
-              ©
-            </span>
+          <h1 className="font-black leading-[0.85] tracking-[-0.07em] text-[64px] sm:text-[80px] md:text-[100px] lg:text-[120px]">
+            <HeadlineStagger
+              lines={["FOUNDING", "ENGINEER"]}
+              suffix={
+                <span className="ml-1 align-top text-[28px] tracking-normal sm:text-[32px] md:text-[40px] lg:text-[44px]">
+                  ©
+                </span>
+              }
+            />
           </h1>
         </section>
 
-        {/* Rows 2–3 col 3 — portrait */}
+        {/* Portrait */}
         <div
           style={{ gridArea: "portrait" }}
-          className="relative overflow-hidden border-r border-b border-[#333]"
+          className="relative aspect-[4/3] overflow-hidden border-r border-b border-[#333] md:aspect-auto md:h-full"
         >
-          <Image
-            src="/craig.jpg"
-            alt="Craig Ondevilla"
-            fill
-            priority
-            sizes="25vw"
-            className="object-cover grayscale contrast-[1.05]"
-          />
-          <div className="absolute left-3 top-3 text-[10px] font-bold tracking-[0.25em] text-[#f4eee5] mix-blend-difference">
+          <PortraitParallax src="/craig.jpg" alt="Craig Ondevilla" />
+          <div className="pointer-events-none absolute left-3 top-3 text-[10px] font-bold tracking-[0.25em] text-[#f4eee5] mix-blend-difference">
             [PORTRAIT]
           </div>
         </div>
 
-        {/* Row 2 col 4 — currently shipping */}
+        {/* Currently */}
         <aside
           style={{ gridArea: "curr" }}
-          className="flex flex-col justify-between border-r border-b border-[#333] p-6"
+          className="flex flex-col justify-between gap-6 border-r border-b border-[#333] p-5 md:gap-0 md:p-6"
         >
           <span className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
             [CURRENTLY]
@@ -130,17 +129,17 @@ export default function Hero() {
           </div>
         </aside>
 
-        {/* Row 3 col 4 — stats */}
+        {/* Stats */}
         <aside
           style={{ gridArea: "stat" }}
-          className="flex flex-col justify-between border-r border-b border-[#333] p-6"
+          className="flex flex-col justify-between gap-6 border-r border-b border-[#333] p-5 md:gap-0 md:p-6"
         >
           <span className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
             [STATS]
           </span>
           <div>
             <div className="text-[48px] font-black leading-none tracking-[-0.04em]">
-              1,039
+              <CountUp target={1039} duration={1600} />
             </div>
             <div className="mt-2 text-[11px] font-bold tracking-[0.25em] text-[#888]">
               COMMITS · 12 MO
@@ -148,29 +147,31 @@ export default function Hero() {
           </div>
         </aside>
 
-        {/* Row 4 — project index */}
+        {/* Project cells */}
         {projects.map((p, i) => (
-          <article
+          <Link
             key={p.num}
+            href={p.href}
+            data-cursor={`→ ${p.num}`}
             style={{ gridArea: `p${i}` }}
-            className={`flex flex-col justify-between border-r border-b border-[#333] p-5 ${
-              p.accent ? "bg-[#38bdf8]" : ""
+            className={`group flex items-baseline justify-between gap-6 border-r border-b border-[#333] p-5 transition-colors md:flex-col md:items-stretch md:justify-between md:gap-0 ${
+              p.accent ? "bg-[#38bdf8]" : "hover:bg-[#222]"
             }`}
           >
             <span
-              className={`text-[11px] font-bold tracking-[0.25em] ${
+              className={`shrink-0 text-[11px] font-bold tracking-[0.25em] ${
                 p.accent ? "text-[#1a1a1a]" : "text-[#888]"
               }`}
             >
               [{p.num}]
             </span>
-            <div>
+            <div className="flex-1 text-right md:text-left">
               <div
-                className={`text-[28px] font-black leading-none tracking-[-0.04em] ${
+                className={`text-[24px] font-black leading-none tracking-[-0.04em] md:text-[28px] ${
                   p.accent ? "text-[#1a1a1a]" : ""
                 }`}
               >
-                {p.name}
+                <ScrambleText text={p.name} />
               </div>
               <div
                 className={`mt-2 text-[12px] leading-snug ${
@@ -180,13 +181,13 @@ export default function Hero() {
                 {p.subtitle}
               </div>
             </div>
-          </article>
+          </Link>
         ))}
 
-        {/* Row 5 — footer strip */}
+        {/* Footer */}
         <footer
           style={{ gridArea: "foot" }}
-          className="flex items-center justify-between border-r border-b border-[#333] px-8"
+          className="flex flex-col gap-2 border-r border-b border-[#333] px-5 py-4 md:h-[100px] md:flex-row md:items-center md:justify-between md:gap-0 md:px-8 md:py-0"
         >
           <span className="text-[11px] font-bold tracking-[0.25em]">
             EST. 2025 ☉ MOBILE / BACKEND / WEB
