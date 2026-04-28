@@ -10,10 +10,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
     "/work",
-    "/profile",
-    "/achievements",
+    "/about",
     "/contact",
-    "/settings",
+    "/achievements",
     "/uses",
     "/changelog",
   ].map((path) => ({
