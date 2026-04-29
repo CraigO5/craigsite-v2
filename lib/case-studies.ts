@@ -1,3 +1,5 @@
+export type CaseStudyKind = "job" | "project" | "hackathon";
+
 export type CaseStudySection = {
   heading: string;
   body: string;
@@ -6,6 +8,7 @@ export type CaseStudySection = {
 export type CaseStudy = {
   slug: string;
   title: string;
+  kind: CaseStudyKind;
   tagline: string;
   role: string;
   dates: string;
@@ -21,8 +24,9 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "euno",
     title: "Euno",
+    kind: "job",
     tagline:
-      "Founding engineer of three production repos. AI agent pipeline, encryption, retrieval, and the longitudinal data model behind it.",
+      "Founding engineer at Euno. Rebuilt the product across three production repos and now lead the engineering team.",
     role: "Founding Software Engineer",
     dates: "October 2025 – Present",
     status: "Ongoing",
@@ -50,15 +54,15 @@ export const caseStudies: CaseStudy[] = [
       { label: "Integration tests", value: "22" },
     ],
     summary:
-      "Sole engineer of three production repos — React Native iOS, NestJS backend, Vite web — owning architecture, deployment, and on-call. The product turns user conversations into a structured, queryable knowledge base that drives a personalized AI loop running continuously in the background.",
+      "Hired as the founding engineer at Euno in October 2025. Rebuilt the product end-to-end across three production repos — React Native iOS, NestJS backend, Vite web. Started solo; now lead a small engineering team while continuing to own architecture and the AI agent pipeline.",
     sections: [
       {
         heading: "The problem",
-        body: "Euno was a Swift iOS app with client-side scheduling and no real backend AI loop. It couldn't run on Android, state was trapped on-device, and scaling to a social layer or persistent AI was architecturally off the table. I took it over solo and rebuilt everything without pausing shipping.",
+        body: "When I joined Euno, the product was a Swift iOS app with client-side scheduling and no real backend AI loop. It couldn't run on Android, state was trapped on-device, and scaling to a social layer or persistent AI was architecturally off the table. I was brought on to rebuild it solo without pausing shipping.",
       },
       {
         heading: "What I built",
-        body: "Three production repos, all in TypeScript:\n\n— A cross-platform React Native app (migrated from Swift) with biometric-gated field-level encryption, offline-first caching, and HealthKit sync.\n\n— A modular NestJS 11 backend handling auth, AI generation, semantic retrieval, social features, billing, and notifications, with full test coverage and production-grade error handling.\n\n— A Vite + React + Tailwind + shadcn/ui web app (243 files, 15 Supabase migrations) for end-users and licensed providers, with live Stripe billing, dual auth contexts, and two AI-powered Supabase edge functions.",
+        body: "Three production repos, all in TypeScript:\n\n— A cross-platform React Native app (migrated from Swift) with biometric-gated field-level encryption, offline-first caching, and HealthKit sync.\n\n— A modular NestJS 11 backend handling auth, AI generation, semantic retrieval, social features, billing, and notifications, with full test coverage and production-grade error handling.\n\n— A Vite + React + Tailwind + shadcn/ui web app (243 files, 15 Supabase migrations) for end-users and licensed providers, with live Stripe billing, dual auth contexts, and two AI-powered Supabase edge functions.\n\nThe team has grown since — I now lead a small engineering team while continuing to own architecture and the AI pipeline.",
       },
       {
         heading: "The 7-step AI agent pipeline",
@@ -85,6 +89,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "coverme",
     title: "CoverMe",
+    kind: "project",
     tagline:
       "AI cover letter generator. 500+ users, 1,000+ letters, sub-5-second responses.",
     role: "Solo developer",
@@ -122,6 +127,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "pisayian",
     title: "Pisayian Data Cleaner",
+    kind: "hackathon",
     tagline:
       "1st place, Kapwa Codefest 2025. CSV → 3 normalized tables. 95% manual-cleanup reduction.",
     role: "Frontend lead (team of 4)",
@@ -155,6 +161,7 @@ export const caseStudies: CaseStudy[] = [
   {
     slug: "spyfall",
     title: "Spyfall Unlimited",
+    kind: "project",
     tagline:
       "Browser-based multiplayer social deduction. Built solo to learn realtime systems.",
     role: "Solo developer",

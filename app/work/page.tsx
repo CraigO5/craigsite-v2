@@ -6,6 +6,7 @@ import PageFooter from "@/components/PageFooter";
 import MarqueeTicker from "@/components/MarqueeTicker";
 import CellReveal from "@/components/CellReveal";
 import ScrambleText from "@/components/ScrambleText";
+import KindBadge from "@/components/KindBadge";
 import { caseStudies } from "@/lib/case-studies";
 import { projects } from "@/lib/projects";
 
@@ -58,11 +59,14 @@ export default function WorkIndex() {
                   <Link
                     href={`/work/${cs.slug}`}
                     data-cursor={`→ ${num}`}
-                    className="grid grid-cols-12 items-baseline gap-6 px-8 py-10 transition-colors hover:bg-[#222]"
+                    className="grid grid-cols-12 items-baseline gap-x-6 gap-y-3 px-8 py-10 transition-colors hover:bg-[#222]"
                   >
-                    <span className="col-span-12 text-[11px] font-bold tracking-[0.25em] text-[#888] md:col-span-1">
-                      [{num}]
-                    </span>
+                    <div className="col-span-12 flex items-baseline gap-3 md:col-span-1 md:flex-col md:items-start md:gap-2">
+                      <span className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
+                        [{num}]
+                      </span>
+                      <KindBadge kind={cs.kind} variant="compact" size="sm" />
+                    </div>
                     <h2 className="col-span-12 font-black leading-[0.95] tracking-[-0.04em] text-[32px] md:text-[44px] lg:text-[56px] md:col-span-4">
                       <ScrambleText text={cs.title.toUpperCase()} />
                     </h2>

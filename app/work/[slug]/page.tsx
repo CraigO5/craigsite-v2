@@ -5,6 +5,7 @@ import NavBar from "@/components/NavBar";
 import PageFooter from "@/components/PageFooter";
 import MetadataRow from "@/components/MetadataRow";
 import CountUp from "@/components/CountUp";
+import KindBadge from "@/components/KindBadge";
 import { caseStudies, getCaseStudy } from "@/lib/case-studies";
 
 export function generateStaticParams() {
@@ -58,9 +59,13 @@ export default async function CaseStudyPage({
 
       <article className="border-l border-r border-[#333]">
         <header className="border-b border-[#333] px-8 py-20">
-          <p className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
-            [{num}] / SELECTED WORK
-          </p>
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <p className="text-[11px] font-bold tracking-[0.25em] text-[#888]">
+              [{num}] / SELECTED WORK
+            </p>
+            <span className="text-[#444]">·</span>
+            <KindBadge kind={cs.kind} />
+          </div>
           <h1 className="mt-8 font-black leading-[0.85] tracking-[-0.07em] text-[56px] sm:text-[80px] md:text-[110px] lg:text-[140px]">
             {cs.title.toUpperCase()}
           </h1>

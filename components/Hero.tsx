@@ -4,10 +4,13 @@ import PortraitParallax from "@/components/PortraitParallax";
 import ScrambleText from "@/components/ScrambleText";
 import CountUp from "@/components/CountUp";
 import LiveClock from "@/components/LiveClock";
+import KindBadge from "@/components/KindBadge";
 
+type Kind = "job" | "project" | "hackathon";
 type Project = {
   num: string;
   name: string;
+  kind: Kind;
   subtitle: string;
   href: string;
   accent?: boolean;
@@ -17,24 +20,28 @@ const projects: Project[] = [
   {
     num: "001",
     name: "EUNO",
+    kind: "job",
     subtitle: "AI self-reflection companion",
     href: "/work/euno",
   },
   {
     num: "002",
     name: "COVERME",
+    kind: "project",
     subtitle: "AI cover letter generator",
     href: "/work/coverme",
   },
   {
     num: "003",
     name: "PISAYIAN",
+    kind: "hackathon",
     subtitle: "CSV → relational tables for nonprofit alumni network",
     href: "/work/pisayian",
   },
   {
     num: "004",
     name: "SPYFALL",
+    kind: "project",
     subtitle: "Multiplayer browser-based social deduction game",
     href: "/work/spyfall",
     accent: true,
@@ -159,11 +166,16 @@ export default function Hero() {
             }`}
           >
             <span
-              className={`shrink-0 text-[11px] font-bold tracking-[0.25em] ${
+              className={`flex shrink-0 items-center gap-2 text-[11px] font-bold tracking-[0.25em] ${
                 p.accent ? "text-[#1a1a1a]" : "text-[#888]"
               }`}
             >
-              [{p.num}]
+              <span>[{p.num}]</span>
+              <KindBadge
+                kind={p.kind}
+                variant="icon"
+                overrideColor={p.accent ? "text-[#1a1a1a]" : undefined}
+              />
             </span>
             <div className="flex-1 text-right md:text-left">
               <div

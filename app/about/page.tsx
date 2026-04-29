@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const facts = [
   { label: "BASED IN", value: "Champaign, IL" },
   { label: "EDUCATION", value: "B.S. Computer Science, UIUC, 2025 — Honors, 3.69 GPA" },
-  { label: "ROLE", value: "Founding engineer at Euno" },
+  { label: "ROLE", value: "Founding engineer at Euno · leading the engineering team" },
   { label: "RECOGNITION", value: "1st place — Kapwa Codefest 2025" },
   { label: "INTERESTS", value: "ML applied to user modeling" },
   { label: "OPEN TO", value: "AI engineering and senior full-stack roles" },
@@ -78,12 +78,14 @@ export default function AboutPage() {
               2025 with a B.S. in Computer Science and Honors (GPA 3.69).
             </p>
             <p>
-              Right now I&apos;m the sole engineer at Euno, building AI agent
-              systems end-to-end — the mobile client, the backend, the
-              encryption layer, and the retrieval loop. I rebuilt the product
-              from a Swift iOS app into a cross-platform React Native app with
+              I joined Euno in October 2025 as their founding engineer. I
+              rebuilt the product end-to-end — the mobile client, the
+              backend, the encryption layer, and the retrieval loop — moving
+              from a Swift iOS app to a cross-platform React Native app with
               a NestJS backend, biometric-gated field-level encryption, and a
-              continuously-running per-user AI pipeline.
+              continuously-running per-user AI pipeline. Started solo; now
+              lead a small engineering team while continuing to own
+              architecture and the AI agent pipeline.
             </p>
             <p>
               In September 2025, my team won 1st place at Kapwa Codefest for
